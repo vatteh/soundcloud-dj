@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 describe('Stream', () => {
     const props = {
-        tracks: [{ title: 'x' }, { title: 'y' }],
+        tracks: [{ origin: { title: 'x' }}, { origin: { title: 'y' }}],
     };
 
     it('shows two elements', () => {
