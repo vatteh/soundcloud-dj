@@ -1,3 +1,5 @@
+/* eslint-env browser */
+
 import SC from 'soundcloud';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -26,7 +28,7 @@ ReactDOM.render(
       </Route>
     </Router>
   </Provider>,
-  document.getElementById('app')
+  document.getElementById('app'),
 );
 
 module.hot.accept();
