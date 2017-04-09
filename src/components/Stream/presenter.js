@@ -34,7 +34,7 @@ class Stream extends Component {
           {
             tracks.map((track, key) =>
               <div className="track" key={key}>
-                {track.origin.title}
+                {track.title}
                 <button type="button" onClick={() => onPlay(track)}>Play</button>
               </div>,
             )
@@ -45,7 +45,7 @@ class Stream extends Component {
             <audio
               id="audio"
               ref={(element) => { this.audioElement = element; }}
-              src={`${activeTrack.origin.stream_url}?client_id=${CLIENT_ID}`} /> : null
+              src={`${activeTrack.stream_url}?client_id=${CLIENT_ID}`} /> : null
         }
       </div>
     );
