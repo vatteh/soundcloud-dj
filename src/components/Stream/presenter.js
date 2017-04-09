@@ -1,8 +1,8 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { CLIENT_ID } from '../../constants/auth';
 
-class Stream extends Component() {
+class Stream extends Component {
   componentDidUpdate() {
     const audioElement = ReactDOM.findDOMNode(this.audioElement);
 
