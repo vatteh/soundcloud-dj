@@ -8,5 +8,9 @@
     "prop-types": [0],
     "no-unused-vars": [0]
   },
-  "extends": ["airbnb-base"]
+  "extends": ["airbnb-base"],
+  "env": {
+      "browser": true,
+      "node": true
+  }
 }

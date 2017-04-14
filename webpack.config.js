@@ -1,8 +1,9 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://localhost:8080',
+    'webpack-dev-server/client?http://localhost:1337',
     'webpack/hot/only-dev-server',
     './src/index.js',
   ],
@@ -21,7 +22,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx'],
   },
   output: {
-    path: __dirname + '/dist',
+    path: path.join(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.js',
   },
@@ -29,6 +30,7 @@ module.exports = {
     contentBase: './dist',
     hot: true,
     historyApiFallback: true,
+    port: 1337,
   },
   plugins: [
     new webpack.ProvidePlugin({

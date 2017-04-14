@@ -10,6 +10,12 @@ import App from './components/App';
 import Stream from './components/Stream';
 
 const store = configureStore();
+if (module.hot) {
+  module.hot.accept('./reducers/', () => {
+    const nextRootReducer = require('./reducers/index').default; // eslint-disable-line global-require
+    store.replaceReducer(nextRootReducer);
+  });
+}
 const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
@@ -17,7 +23,6 @@ ReactDOM.render(
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={Stream}/>
-        <Route path="/" component={Stream}/>
       </Route>
     </Router>
   </Provider>,
