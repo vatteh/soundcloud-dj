@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+import Avatar from 'material-ui/Avatar';
 import CLIENT_ID from '../../constants/auth';
 
 class Stream extends Component {
@@ -28,13 +30,24 @@ class Stream extends Component {
       <div>
         <br />
         <div>
-          {
-            tracks.map((track, key) =>
-              <div className="track" key={key}>
-                {track.title} <button type="button" onClick={onPlay.bind(this, track)}>Play</button>
-              </div>,
-            )
-          }
+          <Table fixedHeader={true}>
+            <TableBody displayRowCheckbox={false} showRowHover={true}>
+              {
+                tracks.map((track, key) =>
+                  <TableRow key={key}>
+                    <TableRowColumn style={{ width: 60 }}>
+                      <Avatar src={track.artwork_url} size={60} style={{ borderRadius: 0 }}/>
+                    </TableRowColumn>
+                    <TableRowColumn><a href={track.permalink_url}>{track.title}</a></TableRowColumn>
+                    <TableRowColumn style={{ width: 50 }}>{track.durationFormatted}</TableRowColumn>
+                    <TableRowColumn style={{ width: 50 }}>
+                      <i className="fa fa-play-circle fa-3x" aria-hidden="true" onClick={onPlay.bind(this, track)}></i>
+                    </TableRowColumn>
+                  </TableRow>,
+                )
+              }
+            </TableBody>
+          </Table>
         </div>
         {
           activeTrack ? <audio
