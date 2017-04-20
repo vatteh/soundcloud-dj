@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import Avatar from 'material-ui/Avatar';
+import FontIcon from 'material-ui/FontIcon';
 import CLIENT_ID from '../../constants/auth';
 
 class Stream extends Component {
@@ -14,17 +15,33 @@ class Stream extends Component {
 
     if (!audioElement) { return; }
 
-    const { activeTrack } = this.props;
+    const { activeTrack, isPlaying } = this.props;
 
-    if (activeTrack) {
+    if (activeTrack && isPlaying) {
       audioElement.play();
     } else {
       audioElement.pause();
     }
   }
 
+  icon(track) {
+    const { activeTrack, isPlaying, onPlayPause } = this.props;
+    return (
+      <div className="trackArtwork" onClick={onPlayPause.bind(this, track)}>
+        <img src={track.artwork_url} style={{ width: 75 }} />
+        {
+          (isPlaying && track === activeTrack) ?
+          <div>
+            <i className="fa fa-volume-up fa-3x visibleOnHover" aria-hidden="true"></i>
+            <i className="fa fa-pause fa-3x hiddenOnHover" aria-hidden="true"></i>
+          </div> : <i className="fa fa-play fa-3x hiddenOnHover" aria-hidden="true"></i>
+        }
+      </div>
+    );
+  }
+
   render() {
-    const { tracks = [], activeTrack, onPlay } = this.props;
+    const { tracks = [], activeTrack } = this.props;
 
     return (
       <div>
@@ -35,14 +52,11 @@ class Stream extends Component {
               {
                 tracks.map((track, key) =>
                   <TableRow key={key}>
-                    <TableRowColumn style={{ width: 60 }}>
-                      <Avatar src={track.artwork_url} size={60} style={{ borderRadius: 0 }}/>
+                    <TableRowColumn style={{ width: 75 }}>
+                      {this.icon(track)}
                     </TableRowColumn>
                     <TableRowColumn><a href={track.permalink_url}>{track.title}</a></TableRowColumn>
                     <TableRowColumn style={{ width: 50 }}>{track.durationFormatted}</TableRowColumn>
-                    <TableRowColumn style={{ width: 50 }}>
-                      <i className="fa fa-play-circle fa-3x" aria-hidden="true" onClick={onPlay.bind(this, track)}></i>
-                    </TableRowColumn>
                   </TableRow>,
                 )
               }

@@ -1,7 +1,7 @@
-import { setTracks, playTrack, fetchTracks } from './track';
+import { setTracks, playPauseTrack, fetchTracks } from './track';
 
 export {
     fetchTracks,
     setTracks,
-    playTrack,
+    playPauseTrack,
 };

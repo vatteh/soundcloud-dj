@@ -1,0 +1,28 @@
+.trackArtwork {
+  width: 75px;
+  position: relative;
+}
+
+.trackArtwork:hover .visibleOnHover {
+  display: none;
+}
+
+.trackArtwork:hover .hiddenOnHover {
+  display: block;
+}
+
+.visibleOnHover {
+  position: absolute;
+  display: block;
+  top: 25%;
+  left: 30%;
+  z-index: 100;
+}
+
+.hiddenOnHover {
+  position: absolute;
+  display: none;
+  top: 25%;
+  left: 30%;
+  z-index: 100;
+}

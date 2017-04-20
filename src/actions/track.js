@@ -10,10 +10,20 @@ export function setTracks(tracks) {
   };
 }
 
-export function playTrack(track) {
-  return {
-    type: actionTypes.TRACK_PLAY,
-    track,
+export function playPauseTrack(selectedTrack) {
+  return (dispatch, getState) => {
+    const state = getState();
+
+    if (state.track.activeTrack !== selectedTrack || !state.track.isPlaying) {
+      dispatch({
+        type: actionTypes.TRACK_PLAY,
+        track: selectedTrack,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.TRACK_PAUSE,
+      });
+    }
   };
 }
 

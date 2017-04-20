@@ -4,16 +4,17 @@ import * as actions from '../../actions';
 import Stream from './presenter';
 
 function mapStateToProps(state) {
-  const { tracks, activeTrack } = state.track;
+  const { tracks, activeTrack, isPlaying } = state.track;
   return {
     tracks,
     activeTrack,
+    isPlaying,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    onPlay: bindActionCreators(actions.playTrack, dispatch),
+    onPlayPause: bindActionCreators(actions.playPauseTrack, dispatch),
     onFetchTracks: bindActionCreators(actions.fetchTracks, dispatch),
   };
 }
