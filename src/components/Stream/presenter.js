@@ -12,22 +12,30 @@ class Stream extends Component {
 
   componentDidUpdate() {
     const audioElement = ReactDOM.findDOMNode(this.audioElement);
-
     if (!audioElement) { return; }
-
     const { activeTrack, isPlaying } = this.props;
 
-    if (activeTrack && isPlaying) {
+    if (isPlaying && activeTrack) {
       audioElement.play();
     } else {
       audioElement.pause();
     }
   }
 
+  onRowDoubleClick(track) {
+    const { activeTrack, onRowDoubleClick } = this.props;
+    const audioElement = ReactDOM.findDOMNode(this.audioElement);
+    if (track === activeTrack) {
+      audioElement.currentTime = 0;
+    } else {
+      onRowDoubleClick(track);
+    }
+  }
+
   icon(track) {
-    const { activeTrack, isPlaying, onPlayPause } = this.props;
+    const { activeTrack, isPlaying, onPlayPauseIconClick } = this.props;
     return (
-      <div className="trackArtwork" onClick={onPlayPause.bind(this, track)}>
+      <div className="trackArtwork" onClick={onPlayPauseIconClick.bind(this, track)}>
         <img src={track.artwork_url} style={{ width: 75 }} />
         {
           (isPlaying && track === activeTrack) ?
@@ -51,12 +59,16 @@ class Stream extends Component {
             <TableBody displayRowCheckbox={false} showRowHover={true}>
               {
                 tracks.map((track, key) =>
-                  <TableRow key={key}>
-                    <TableRowColumn style={{ width: 75 }}>
+                  <TableRow key={key} className="tableRow" onDoubleClick={this.onRowDoubleClick.bind(this, track)}>
+                    <TableRowColumn style={{ width: 75, padding: 0 }}>
                       {this.icon(track)}
                     </TableRowColumn>
-                    <TableRowColumn><a href={track.permalink_url}>{track.title}</a></TableRowColumn>
-                    <TableRowColumn style={{ width: 50 }}>{track.durationFormatted}</TableRowColumn>
+                    <TableRowColumn><span style={{ fontSize: `${1.2}em` }}>{track.title}</span></TableRowColumn>
+                    <TableRowColumn style={{ width: 60 }}>
+                      <span style={{ fontSize: `${1.2}em` }}>
+                        {track.durationFormatted}
+                      </span>
+                    </TableRowColumn>
                   </TableRow>,
                 )
               }

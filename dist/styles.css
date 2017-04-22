@@ -3,11 +3,11 @@
   position: relative;
 }
 
-.trackArtwork:hover .visibleOnHover {
+.tableRow:hover .visibleOnHover {
   display: none;
 }
 
-.trackArtwork:hover .hiddenOnHover {
+.tableRow:hover .hiddenOnHover {
   display: block;
 }
 

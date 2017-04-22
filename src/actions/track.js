@@ -27,6 +27,13 @@ export function playPauseTrack(selectedTrack) {
   };
 }
 
+export function playTrack(selectedTrack) {
+  return {
+    type: actionTypes.TRACK_PLAY,
+    track: selectedTrack,
+  };
+}
+
 function formatTime(milliseconds) {
   const totalSeconds = Math.floor(milliseconds / 1000);
   const totalMinutes = Math.floor(totalSeconds / 60);

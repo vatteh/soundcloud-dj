@@ -14,7 +14,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onPlayPause: bindActionCreators(actions.playPauseTrack, dispatch),
+    onPlayPauseIconClick: bindActionCreators(actions.playPauseTrack, dispatch),
+    onRowDoubleClick: bindActionCreators(actions.playTrack, dispatch),
     onFetchTracks: bindActionCreators(actions.fetchTracks, dispatch),
   };
 }
