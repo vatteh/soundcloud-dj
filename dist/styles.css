@@ -22,7 +22,11 @@
 .hiddenOnHover {
   position: absolute;
   display: none;
-  top: 25%;
-  left: 30%;
+  top: 15%;
+  left: 21%;
   z-index: 100;
+}
+
+.hiddenOnHover:hover {
+  transform: scale(1.2, 1.2);
 }

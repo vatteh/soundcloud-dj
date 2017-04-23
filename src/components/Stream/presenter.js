@@ -41,8 +41,8 @@ class Stream extends Component {
           (isPlaying && track === activeTrack) ?
           <div>
             <i className="fa fa-volume-up fa-3x visibleOnHover" aria-hidden="true"></i>
-            <i className="fa fa-pause fa-3x hiddenOnHover" aria-hidden="true"></i>
-          </div> : <i className="fa fa-play fa-3x hiddenOnHover" aria-hidden="true"></i>
+            <i className="fa fa-pause-circle-o fa-4x hiddenOnHover" aria-hidden="true"></i>
+          </div> : <i className="fa fa-play-circle-o fa-4x hiddenOnHover" aria-hidden="true"></i>
         }
       </div>
     );
@@ -56,6 +56,18 @@ class Stream extends Component {
         <br />
         <div>
           <Table fixedHeader={true}>
+            <TableHeader displaySelectAll={false}>
+              <TableRow>
+                <TableHeaderColumn>Title</TableHeaderColumn>
+                <TableHeaderColumn style={{ width: 100 }}>
+                  <i className="fa fa-heart fa-lg" aria-hidden="true"></i>
+                </TableHeaderColumn>
+                <TableHeaderColumn style={{ width: 100 }}>
+                  <i className="fa fa-comments fa-lg" aria-hidden="true"></i>
+                </TableHeaderColumn>
+                <TableHeaderColumn style={{ width: 60 }}>Duration</TableHeaderColumn>
+              </TableRow>
+            </TableHeader>
             <TableBody displayRowCheckbox={false} showRowHover={true}>
               {
                 tracks.map((track, key) =>
@@ -64,6 +76,16 @@ class Stream extends Component {
                       {this.icon(track)}
                     </TableRowColumn>
                     <TableRowColumn><span style={{ fontSize: `${1.2}em` }}>{track.title}</span></TableRowColumn>
+                    <TableRowColumn style={{ width: 100 }}>
+                      <span style={{ fontSize: `${1.2}em` }}>
+                        {track.likes_count.toLocaleString()}
+                      </span>
+                    </TableRowColumn>
+                    <TableRowColumn style={{ width: 100 }}>
+                      <span style={{ fontSize: `${1.2}em` }}>
+                        {track.comment_count.toLocaleString()}
+                      </span>
+                    </TableRowColumn>
                     <TableRowColumn style={{ width: 60 }}>
                       <span style={{ fontSize: `${1.2}em` }}>
                         {track.durationFormatted}
