@@ -25,8 +25,9 @@
   top: 15%;
   left: 21%;
   z-index: 100;
+  transition: all .03s ease-in-out;
 }
 
-.hiddenOnHover:hover {
+.trackArtwork:hover .hiddenOnHover {
   transform: scale(1.2, 1.2);
 }

@@ -50,6 +50,9 @@ class Stream extends Component {
 
   render() {
     const { tracks = [], activeTrack } = this.props;
+    const likesColumnStyles = { width: 60 };
+    const commentsColumnStyles = { width: 60 };
+    const durationColumnStyles = { width: 60 };
 
     return (
       <div>
@@ -59,13 +62,13 @@ class Stream extends Component {
             <TableHeader displaySelectAll={false}>
               <TableRow>
                 <TableHeaderColumn>Title</TableHeaderColumn>
-                <TableHeaderColumn style={{ width: 100 }}>
+                <TableHeaderColumn style={likesColumnStyles}>
                   <i className="fa fa-heart fa-lg" aria-hidden="true"></i>
                 </TableHeaderColumn>
-                <TableHeaderColumn style={{ width: 100 }}>
+                <TableHeaderColumn style={commentsColumnStyles}>
                   <i className="fa fa-comments fa-lg" aria-hidden="true"></i>
                 </TableHeaderColumn>
-                <TableHeaderColumn style={{ width: 60 }}>Duration</TableHeaderColumn>
+                <TableHeaderColumn style={durationColumnStyles}>Duration</TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false} showRowHover={true}>
@@ -75,18 +78,22 @@ class Stream extends Component {
                     <TableRowColumn style={{ width: 75, padding: 0 }}>
                       {this.icon(track)}
                     </TableRowColumn>
-                    <TableRowColumn><span style={{ fontSize: `${1.2}em` }}>{track.title}</span></TableRowColumn>
-                    <TableRowColumn style={{ width: 100 }}>
+                    <TableRowColumn>
+                      <span style={{ fontSize: `${1.2}em` }}>
+                        {track.title}
+                      </span>
+                    </TableRowColumn>
+                    <TableRowColumn style={likesColumnStyles}>
                       <span style={{ fontSize: `${1.2}em` }}>
                         {track.likes_count.toLocaleString()}
                       </span>
                     </TableRowColumn>
-                    <TableRowColumn style={{ width: 100 }}>
+                    <TableRowColumn style={commentsColumnStyles}>
                       <span style={{ fontSize: `${1.2}em` }}>
                         {track.comment_count.toLocaleString()}
                       </span>
                     </TableRowColumn>
-                    <TableRowColumn style={{ width: 60 }}>
+                    <TableRowColumn style={durationColumnStyles}>
                       <span style={{ fontSize: `${1.2}em` }}>
                         {track.durationFormatted}
                       </span>
