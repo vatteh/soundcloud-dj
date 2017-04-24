@@ -1,33 +1,32 @@
-.trackArtwork {
-  width: 75px;
-  position: relative;
+.tableRow {
+  height: 60px;
 }
 
-.tableRow:hover .visibleOnHover {
+.trackIcons:hover .playingTrackIcon {
   display: none;
 }
 
-.tableRow:hover .hiddenOnHover {
+.tableRow:hover .playTrackIcon {
   display: block;
 }
 
-.visibleOnHover {
-  position: absolute;
+.playingTrackIcon {
   display: block;
-  top: 25%;
-  left: 30%;
-  z-index: 100;
 }
 
-.hiddenOnHover {
-  position: absolute;
+.playTrackIcon {
   display: none;
-  top: 15%;
-  left: 21%;
-  z-index: 100;
   transition: all .03s ease-in-out;
 }
 
-.trackArtwork:hover .hiddenOnHover {
+.pauseTrackIcon {
+  display: none;
+}
+
+.trackIcons:hover .playTrackIcon {
   transform: scale(1.2, 1.2);
+}
+
+.trackIcons:hover .pauseTrackIcon {
+  display: block;
 }

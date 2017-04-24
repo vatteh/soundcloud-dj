@@ -35,14 +35,13 @@ class Stream extends Component {
   icon(track) {
     const { activeTrack, isPlaying, onPlayPauseIconClick } = this.props;
     return (
-      <div className="trackArtwork" onClick={onPlayPauseIconClick.bind(this, track)}>
-        <img src={track.artwork_url} style={{ width: 75 }} />
+      <div className="trackIcons" onClick={onPlayPauseIconClick.bind(this, track)}>
         {
           (isPlaying && track === activeTrack) ?
           <div>
-            <i className="fa fa-volume-up fa-3x visibleOnHover" aria-hidden="true"></i>
-            <i className="fa fa-pause-circle-o fa-4x hiddenOnHover" aria-hidden="true"></i>
-          </div> : <i className="fa fa-play-circle-o fa-4x hiddenOnHover" aria-hidden="true"></i>
+            <i className="fa fa-volume-up fa-3x playingTrackIcon" aria-hidden="true"></i>
+            <i className="fa fa-pause fa-3x pauseTrackIcon" aria-hidden="true"></i>
+          </div> : <i className="fa fa-play fa-3x playTrackIcon" aria-hidden="true"></i>
         }
       </div>
     );
@@ -50,6 +49,7 @@ class Stream extends Component {
 
   render() {
     const { tracks = [], activeTrack } = this.props;
+    const playIconColumnStyles = { width: 50, height: 60 };
     const likesColumnStyles = { width: 60 };
     const commentsColumnStyles = { width: 60 };
     const durationColumnStyles = { width: 60 };
@@ -59,8 +59,9 @@ class Stream extends Component {
         <br />
         <div>
           <Table fixedHeader={true}>
-            <TableHeader displaySelectAll={false}>
+            <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
               <TableRow>
+                <TableHeaderColumn style={playIconColumnStyles}></TableHeaderColumn>
                 <TableHeaderColumn>Title</TableHeaderColumn>
                 <TableHeaderColumn style={likesColumnStyles}>
                   <i className="fa fa-heart fa-lg" aria-hidden="true"></i>
@@ -75,7 +76,7 @@ class Stream extends Component {
               {
                 tracks.map((track, key) =>
                   <TableRow key={key} className="tableRow" onDoubleClick={this.onRowDoubleClick.bind(this, track)}>
-                    <TableRowColumn style={{ width: 75, padding: 0 }}>
+                    <TableRowColumn style={playIconColumnStyles}>
                       {this.icon(track)}
                     </TableRowColumn>
                     <TableRowColumn>
