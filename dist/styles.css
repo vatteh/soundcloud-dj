@@ -2,12 +2,21 @@
   height: 60px;
 }
 
+.trackIcons {
+  position: relative;
+}
+
 .trackIcons:hover .playingTrackIcon {
   display: none;
 }
 
 .tableRow:hover .playTrackIcon {
-  display: block;
+  opacity: 1;
+  margin-left: 3px;
+}
+
+.tableRow:hover .indexTrackIcon {
+  display: none;
 }
 
 .playingTrackIcon {
@@ -15,12 +24,20 @@
 }
 
 .playTrackIcon {
-  display: none;
-  transition: all .03s ease-in-out;
+  opacity: 0;
+  margin-left: 0;
+  transition: opacity .3s, transform .03s, margin-left .3s, ease-in-out;
 }
 
 .pauseTrackIcon {
   display: none;
+}
+
+.indexTrackIcon {
+  position: absolute;
+  display: block;
+  top: 5px;
+  font-size: 26px;
 }
 
 .trackIcons:hover .playTrackIcon {

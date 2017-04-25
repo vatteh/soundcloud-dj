@@ -32,7 +32,7 @@ class Stream extends Component {
     }
   }
 
-  icon(track) {
+  icon(track, index) {
     const { activeTrack, isPlaying, onPlayPauseIconClick } = this.props;
     return (
       <div className="trackIcons" onClick={onPlayPauseIconClick.bind(this, track)}>
@@ -41,7 +41,10 @@ class Stream extends Component {
           <div>
             <i className="fa fa-volume-up fa-3x playingTrackIcon" aria-hidden="true"></i>
             <i className="fa fa-pause fa-3x pauseTrackIcon" aria-hidden="true"></i>
-          </div> : <i className="fa fa-play fa-3x playTrackIcon" aria-hidden="true"></i>
+          </div> : <div>
+            <i className="fa fa-play fa-3x playTrackIcon" aria-hidden="true"></i>
+            <span className="indexTrackIcon" aria-hidden="true">{index + 1}</span>
+          </div>
         }
       </div>
     );
@@ -77,7 +80,7 @@ class Stream extends Component {
                 tracks.map((track, key) =>
                   <TableRow key={key} className="tableRow" onDoubleClick={this.onRowDoubleClick.bind(this, track)}>
                     <TableRowColumn style={playIconColumnStyles}>
-                      {this.icon(track)}
+                      {this.icon(track, key)}
                     </TableRowColumn>
                     <TableRowColumn>
                       <span style={{ fontSize: `${1.2}em` }}>
