@@ -84,7 +84,7 @@ class Stream extends Component {
                     </TableRowColumn>
                     <TableRowColumn>
                       <span style={{ fontSize: `${1.2}em` }}>
-                        {track.title}
+                        <a href={track.permalink_url}>{track.title}</a>
                       </span>
                     </TableRowColumn>
                     <TableRowColumn style={likesColumnStyles}>

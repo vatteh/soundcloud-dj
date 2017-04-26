@@ -12,7 +12,17 @@
 
 .tableRow:hover .playTrackIcon {
   opacity: 1;
-  margin-left: 3px;
+  margin-left: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  transition: color .2s;
+}
+
+a:hover {
+  color: #adadad;
 }
 
 .tableRow:hover .indexTrackIcon {
