@@ -23,7 +23,8 @@ class Stream extends Component {
     }
   }
 
-  onRowDoubleClick(track) {
+  onRowDoubleClick(track, e) {
+    if (e.target.tagName === 'I') { return; }
     const { activeTrack, onRowDoubleClick } = this.props;
     const audioElement = ReactDOM.findDOMNode(this.audioElement);
     if (track === activeTrack) {
@@ -63,14 +64,13 @@ class Stream extends Component {
                 tracks.map((track, key) =>
                   <TableRow key={key} className="tableRow" onDoubleClick={this.onRowDoubleClick.bind(this, track)}>
                     <TableRowColumn style={playIconColumnStyles}>
-                      <div onClick={this.props.onPlayPauseIconClick.bind(this, track)}>
-                        <PlayIcons
-                          activeTrack={this.props.activeTrack}
-                          isPlaying={this.props.isPlaying}
-                          track={track}
-                          index={key}
-                          ></PlayIcons>
-                      </div>
+                      <PlayIcons
+                        activeTrack={this.props.activeTrack}
+                        isPlaying={this.props.isPlaying}
+                        onClickFunction={this.props.onPlayPauseIconClick.bind(this, track)}
+                        track={track}
+                        index={key}
+                        ></PlayIcons>
                     </TableRowColumn>
                     <TableRowColumn>
                       <span style={{ fontSize: `${1.2}em` }}>

@@ -1,8 +1,8 @@
 import React from 'react';
 
-function PlayIcons({ activeTrack, isPlaying, track, index }) {
+function PlayIcons({ activeTrack, isPlaying, onClickFunction, track, index }) {
   return (
-    <div className="trackIcons">
+    <div onClick={onClickFunction} className="trackIcons">
       {
         (isPlaying && track === activeTrack) ?
         <div>
@@ -20,6 +20,7 @@ function PlayIcons({ activeTrack, isPlaying, track, index }) {
 PlayIcons.propTypes = {
   activeTrack: React.PropTypes.object,
   isPlaying: React.PropTypes.bool,
+  onClickFunction: React.PropTypes.func,
   track: React.PropTypes.object,
   index: React.PropTypes.number,
 };
