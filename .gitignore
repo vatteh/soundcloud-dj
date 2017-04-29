@@ -9,6 +9,9 @@
 # production
 /build
 
+# auth
+/src/constants/auth.js
+
 # misc
 .DS_Store
 .env

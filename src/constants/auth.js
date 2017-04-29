@@ -1,3 +1,3 @@
-const CLIENT_ID = 'a281614d7f34dc30b665dfcaa3ed7505';
+const CLIENT_ID = 'GT7hFu42C5OFHa96GrAzCyb8Ns857o92';
 
 export default CLIENT_ID;
