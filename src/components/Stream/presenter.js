@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import Avatar from 'material-ui/Avatar';
 import FontIcon from 'material-ui/FontIcon';
+import PlayIcons from '../PlayIcons';
 import CLIENT_ID from '../../constants/auth';
 
 class Stream extends Component {
@@ -30,24 +31,6 @@ class Stream extends Component {
     } else {
       onRowDoubleClick(track);
     }
-  }
-
-  icon(track, index) {
-    const { activeTrack, isPlaying, onPlayPauseIconClick } = this.props;
-    return (
-      <div className="trackIcons" onClick={onPlayPauseIconClick.bind(this, track)}>
-        {
-          (isPlaying && track === activeTrack) ?
-          <div>
-            <i className="fa fa-volume-up fa-3x playingTrackIcon" aria-hidden="true"></i>
-            <i className="fa fa-pause fa-3x pauseTrackIcon" aria-hidden="true"></i>
-          </div> : <div>
-            <i className="fa fa-play fa-3x playTrackIcon" aria-hidden="true"></i>
-            <span className="indexTrackIcon" aria-hidden="true">{index + 1}</span>
-          </div>
-        }
-      </div>
-    );
   }
 
   render() {
@@ -80,7 +63,14 @@ class Stream extends Component {
                 tracks.map((track, key) =>
                   <TableRow key={key} className="tableRow" onDoubleClick={this.onRowDoubleClick.bind(this, track)}>
                     <TableRowColumn style={playIconColumnStyles}>
-                      {this.icon(track, key)}
+                      <div onClick={this.props.onPlayPauseIconClick.bind(this, track)}>
+                        <PlayIcons
+                          activeTrack={this.props.activeTrack}
+                          isPlaying={this.props.isPlaying}
+                          track={track}
+                          index={key}
+                          ></PlayIcons>
+                      </div>
                     </TableRowColumn>
                     <TableRowColumn>
                       <span style={{ fontSize: `${1.2}em` }}>
