@@ -57,3 +57,22 @@ a:hover {
 .trackIcons:hover .pauseTrackIcon {
   display: block;
 }
+
+.player {
+  background: grey;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0;
+  border-top: 1px solid #3a3a3a;
+  z-index: 1;
+  transition: height .2s;
+  -webkit-transition: height .2s;
+  transition-timing-function: ease;
+  -webkit-transition-timing-function: ease;
+}
+
+.player-visible {
+  height: 100px;
+}
