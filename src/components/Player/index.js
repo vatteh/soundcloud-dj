@@ -14,6 +14,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onPlayPauseIconClick: bindActionCreators(actions.playPauseTrack, dispatch),
+    onPrevNextTrackIconClick: bindActionCreators(actions.prevNextTrack, dispatch),
   };
 }
 

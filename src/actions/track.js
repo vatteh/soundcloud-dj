@@ -34,6 +34,20 @@ export function playTrack(selectedTrack) {
   };
 }
 
+export function prevNextTrack(currentTrack, increment) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const index = state.track.tracks.findIndex(track => track === currentTrack);
+
+    if (state.track.tracks[index + increment]) {
+      dispatch({
+        type: actionTypes.TRACK_NEXT_PREV,
+        track: state.track.tracks[index + increment],
+      });
+    }
+  };
+}
+
 function formatTime(milliseconds) {
   const totalSeconds = Math.floor(milliseconds / 1000);
   const totalMinutes = Math.floor(totalSeconds / 60);

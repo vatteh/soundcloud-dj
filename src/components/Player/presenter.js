@@ -49,14 +49,19 @@ const styles = {
 
 export default class Player extends Component {
   render() {
-    const { activeTrack, isPlaying, onPlayPauseIconClick } = this.props;
+    const { activeTrack, isPlaying, onPlayPauseIconClick, onPrevNextTrackIconClick } = this.props;
 
     return (
       <div className={`player ${activeTrack ? 'player-visible' : ''}`} style={styles.playerContainer}>
         <div style={styles.nowPlayingContainer}>now playing</div>
         <div style={styles.playControlsContainer}>
           <div style={styles.controlButtons}>
-            <i className="fa fa-step-backward fa-2x" aria-hidden="true" style={styles.nextPrevSong}></i>
+            <i
+              onClick={onPrevNextTrackIconClick.bind(this, activeTrack, -1)}
+              className="fa fa-step-backward fa-2x"
+              aria-hidden="true"
+              style={styles.nextPrevSong}
+            ></i>
             <span onClick={onPlayPauseIconClick.bind(this, activeTrack)} style={styles.playPauseIcon}>
               {
                 isPlaying ?
@@ -64,7 +69,12 @@ export default class Player extends Component {
                 <i className="fa fa-play-circle-o fa-4x" aria-hidden="true"></i>
               }
             </span>
-            <i className="fa fa-step-forward fa-2x" aria-hidden="true" style={styles.nextPrevSong}></i>
+            <i
+              onClick={onPrevNextTrackIconClick.bind(this, activeTrack, 1)}
+              className="fa fa-step-forward fa-2x"
+              aria-hidden="true"
+              style={styles.nextPrevSong}
+            ></i>
           </div>
           <Slider min={0} max={1000} step={1} sliderStyle={styles.slider}/>
         </div>

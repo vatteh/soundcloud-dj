@@ -19,6 +19,10 @@ export default function (state = initialState, action) {
     case actionTypes.TRACK_PAUSE: {
       return { ...state, isPlaying: false };
     }
+    case actionTypes.TRACK_NEXT_PREV: {
+      const { track } = action;
+      return { ...state, activeTrack: track };
+    }
     default:
       return state;
   }
