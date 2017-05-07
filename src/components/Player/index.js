@@ -15,6 +15,8 @@ function mapDispatchToProps(dispatch) {
   return {
     onPlayPauseIconClick: bindActionCreators(actions.playPauseTrack, dispatch),
     onPrevNextTrackIconClick: bindActionCreators(actions.prevNextTrack, dispatch),
+    onSliderUpdate: bindActionCreators(actions.sliderUpdate, dispatch),
+    onSliderDrag: bindActionCreators(actions.trackPlayheadUpdate, dispatch),
   };
 }
 

@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import configureStore from './stores/configureStore';
 import App from './components/App';
-import Stream from './components/Stream';
+import TrackList from './components/TrackList';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -27,7 +27,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRoute component={Stream}/>
+        <IndexRoute component={TrackList}/>
       </Route>
     </Router>
   </Provider>,

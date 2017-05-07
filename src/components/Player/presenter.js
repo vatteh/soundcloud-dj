@@ -35,7 +35,7 @@ const styles = {
   },
   slider: {
     flexGrow: 1,
-    width: 800,
+    width: 700,
     marginTop: 10,
     marginBottom: 10,
   },
@@ -48,8 +48,31 @@ const styles = {
 };
 
 export default class Player extends Component {
+  onSliderChangeThrottle(e, value) {
+    const { onSliderDrag } = this.props;
+
+    if (this.sliderThrottleTimeoutID) {
+      clearTimeout(this.sliderThrottleTimeoutID);
+    }
+
+    this.sliderThrottleTimeoutID = setTimeout(() => {
+      this.sliderThrottleTimeoutID = null;
+      onSliderDrag(value);
+    }, 250);
+  }
+
+  awaitSliderUpdate() {
+    const { onSliderUpdate } = this.props;
+    const UPDATE_SLIDER_FREQUENCY_MILLISECONDS = 500;
+
+    this.sliderUpdateTimeoutID = setTimeout(() => {
+      this.sliderUpdateTimeoutID = undefined;
+      onSliderUpdate();
+    }, UPDATE_SLIDER_FREQUENCY_MILLISECONDS);
+  }
+
   render() {
-    const { activeTrack, isPlaying, onPlayPauseIconClick, onPrevNextTrackIconClick } = this.props;
+    const { activeTrack, isPlaying, onPlayPauseIconClick, onPrevNextTrackIconClick, onSliderDrag } = this.props;
 
     return (
       <div className={`player ${activeTrack ? 'player-visible' : ''}`} style={styles.playerContainer}>
@@ -76,7 +99,14 @@ export default class Player extends Component {
               style={styles.nextPrevSong}
             ></i>
           </div>
-          <Slider min={0} max={1000} step={1} sliderStyle={styles.slider}/>
+          <Slider
+            min={0}
+            max={1000}
+            step={1}
+            onChange={this.onSliderChangeThrottle.bind(this)}
+            disableFocusRipple={true}
+            sliderStyle={styles.slider}
+          />
         </div>
         <div style={styles.volumeControlContainer}>volume control</div>
       </div>

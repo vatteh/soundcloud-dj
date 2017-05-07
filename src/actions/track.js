@@ -48,6 +48,20 @@ export function prevNextTrack(currentTrack, increment) {
   };
 }
 
+export function sliderUpdate(newValue) {
+  return {
+    type: actionTypes.UPDATE_SLIDER,
+    // track: selectedTrack,
+  };
+}
+
+export function trackPlayheadUpdate() {
+  return {
+    type: actionTypes.UPDATE_TRACK_PLAYHEAD,
+    // track: selectedTrack,
+  };
+}
+
 function formatTime(milliseconds) {
   const totalSeconds = Math.floor(milliseconds / 1000);
   const totalMinutes = Math.floor(totalSeconds / 60);

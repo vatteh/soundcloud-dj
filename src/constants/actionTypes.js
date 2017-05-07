@@ -2,3 +2,5 @@ export const TRACKS_SET = 'TRACKS_SET';
 export const TRACK_PLAY = 'TRACK_PLAY';
 export const TRACK_PAUSE = 'TRACK_PAUSE';
 export const TRACK_NEXT_PREV = 'TRACK_NEXT_PREV';
+export const UPDATE_SLIDER = 'UPDATE_SLIDER';
+export const UPDATE_TRACK_PLAYHEAD = 'UPDATE_TRACK_PLAYHEAD';

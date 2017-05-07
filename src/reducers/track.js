@@ -23,6 +23,10 @@ export default function (state = initialState, action) {
       const { track } = action;
       return { ...state, activeTrack: track };
     }
+    case actionTypes.UPDATE_SLIDER: {
+      const { track } = action;
+      return { ...state };
+    }
     default:
       return state;
   }

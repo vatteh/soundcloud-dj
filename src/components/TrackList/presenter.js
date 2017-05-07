@@ -11,7 +11,7 @@ const likesColumnStyles = { width: 60 };
 const commentsColumnStyles = { width: 60 };
 const durationColumnStyles = { width: 60 };
 
-class Stream extends Component {
+class TrackList extends Component {
   componentDidMount() {
     this.props.onFetchTracks();
   }
@@ -108,4 +108,4 @@ class Stream extends Component {
   }
 }
 
-export default Stream;
+export default TrackList;

@@ -1,4 +1,12 @@
-import { setTracks, playPauseTrack, fetchTracks, playTrack, prevNextTrack } from './track';
+import {
+  setTracks,
+  playPauseTrack,
+  fetchTracks,
+  playTrack,
+  prevNextTrack,
+  sliderUpdate,
+  trackPlayheadUpdate,
+} from './track';
 
 export {
     fetchTracks,
@@ -6,4 +14,6 @@ export {
     playPauseTrack,
     playTrack,
     prevNextTrack,
+    sliderUpdate,
+    trackPlayheadUpdate,
 };
