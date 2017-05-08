@@ -17,6 +17,7 @@ function mapDispatchToProps(dispatch) {
     onPlayPauseIconClick: bindActionCreators(actions.playPauseTrack, dispatch),
     onRowDoubleClick: bindActionCreators(actions.playTrack, dispatch),
     onFetchTracks: bindActionCreators(actions.fetchTracks, dispatch),
+    onActiveRowDoubleClick: bindActionCreators(actions.updateTrackPlayhead, dispatch),
   };
 }
 

@@ -48,17 +48,17 @@ export function prevNextTrack(currentTrack, increment) {
   };
 }
 
-export function sliderUpdate(newValue) {
+export function updateSlider(newValue) {
   return {
     type: actionTypes.UPDATE_SLIDER,
-    // track: selectedTrack,
+    currentTrackTime: newValue,
   };
 }
 
-export function trackPlayheadUpdate() {
+export function updateTrackPlayhead(newValue) {
   return {
     type: actionTypes.UPDATE_TRACK_PLAYHEAD,
-    // track: selectedTrack,
+    currentTrackTime: newValue,
   };
 }
 
@@ -83,6 +83,7 @@ export function fetchTracks() {
       .then(response => response.json())
       .then((data) => {
         data.collection.forEach((element) => {
+          element.duration = Math.floor(element.duration / 1000);
           element.durationFormatted = formatTime(element.duration);
         });
         dispatch(setTracks(data.collection));

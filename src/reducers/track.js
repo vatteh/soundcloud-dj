@@ -4,30 +4,47 @@ const initialState = {
   tracks: [],
   activeTrack: null,
   isPlaying: false,
+  currentTrackTime: 0,
 };
 
 export default function (state = initialState, action) {
+  const stateCopy = { ...state };
+  stateCopy.seekTo = false;
+
   switch (action.type) {
     case actionTypes.TRACKS_SET: {
       const { tracks } = action;
-      return { ...state, tracks };
+      stateCopy.tracks = tracks;
+      return stateCopy;
     }
     case actionTypes.TRACK_PLAY: {
       const { track } = action;
-      return { ...state, activeTrack: track, isPlaying: true };
+      stateCopy.activeTrack = track;
+      stateCopy.isPlaying = true;
+      return stateCopy;
     }
     case actionTypes.TRACK_PAUSE: {
-      return { ...state, isPlaying: false };
+      stateCopy.isPlaying = false;
+      return stateCopy;
     }
     case actionTypes.TRACK_NEXT_PREV: {
       const { track } = action;
-      return { ...state, activeTrack: track };
+      stateCopy.isPlaying = true;
+      stateCopy.activeTrack = track;
+      return stateCopy;
+    }
+    case actionTypes.UPDATE_TRACK_PLAYHEAD: {
+      const { currentTrackTime } = action;
+      stateCopy.seekTo = true;
+      stateCopy.currentTrackTime = currentTrackTime;
+      return stateCopy;
     }
     case actionTypes.UPDATE_SLIDER: {
-      const { track } = action;
-      return { ...state };
+      const { currentTrackTime } = action;
+      stateCopy.currentTrackTime = currentTrackTime;
+      return stateCopy;
     }
     default:
-      return state;
+      return stateCopy;
   }
 }

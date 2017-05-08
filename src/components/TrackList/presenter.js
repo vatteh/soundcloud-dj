@@ -16,24 +16,15 @@ class TrackList extends Component {
     this.props.onFetchTracks();
   }
 
-  componentDidUpdate() {
-    const audioElement = ReactDOM.findDOMNode(this.audioElement);
-    if (!audioElement) { return; }
-    const { activeTrack, isPlaying } = this.props;
-
-    if (isPlaying && activeTrack) {
-      audioElement.play();
-    } else {
-      audioElement.pause();
-    }
-  }
-
   rowDoubleClickHelper(track, e) {
-    if (e.target.tagName === 'I') { return; }
-    const { activeTrack, onRowDoubleClick } = this.props;
-    const audioElement = ReactDOM.findDOMNode(this.audioElement);
+    if (e.target.tagName === 'I') {
+      return;
+    }
+
+    const { activeTrack, onRowDoubleClick, onActiveRowDoubleClick } = this.props;
+
     if (track === activeTrack) {
-      audioElement.currentTime = 0;
+      onActiveRowDoubleClick(0);
     } else {
       onRowDoubleClick(track);
     }
@@ -97,12 +88,6 @@ class TrackList extends Component {
           </TableBody>
         </Table>
         <Player activeTrack={activeTrack}></Player>
-        {
-          activeTrack ? <audio
-            id="audio"
-            ref={(element) => { this.audioElement = element; }}
-            src={`${activeTrack.stream_url}?client_id=${CLIENT_ID}`} /> : null
-        }
       </div>
     );
   }

@@ -4,8 +4,8 @@ import {
   fetchTracks,
   playTrack,
   prevNextTrack,
-  sliderUpdate,
-  trackPlayheadUpdate,
+  updateSlider,
+  updateTrackPlayhead,
 } from './track';
 
 export {
@@ -14,6 +14,6 @@ export {
     playPauseTrack,
     playTrack,
     prevNextTrack,
-    sliderUpdate,
-    trackPlayheadUpdate,
+    updateSlider,
+    updateTrackPlayhead,
 };
