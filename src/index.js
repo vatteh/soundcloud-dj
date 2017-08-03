@@ -27,7 +27,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRoute component={TrackList}/>
+        <IndexRoute component={TrackList} />
       </Route>
     </Router>
   </Provider>,

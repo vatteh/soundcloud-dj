@@ -38,56 +38,56 @@ class TrackList extends Component {
         <Table fixedHeader={true}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
-              <TableHeaderColumn style={playIconColumnStyles}></TableHeaderColumn>
+              <TableHeaderColumn style={playIconColumnStyles} />
               <TableHeaderColumn>Title</TableHeaderColumn>
               <TableHeaderColumn style={likesColumnStyles}>
-                <i className="fa fa-heart fa-lg" aria-hidden="true"></i>
+                <i className="fa fa-heart fa-lg" aria-hidden="true" />
               </TableHeaderColumn>
               <TableHeaderColumn style={commentsColumnStyles}>
-                <i className="fa fa-comments fa-lg" aria-hidden="true"></i>
+                <i className="fa fa-comments fa-lg" aria-hidden="true" />
               </TableHeaderColumn>
               <TableHeaderColumn style={durationColumnStyles}>Duration</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false} showRowHover={true}>
-            {
-              tracks.map((track, key) =>
-                <TableRow key={key} className="tableRow" onDoubleClick={this.rowDoubleClickHelper.bind(this, track)}>
-                  <TableRowColumn style={playIconColumnStyles}>
-                    <PlayIcons
-                      activeTrack={activeTrack}
-                      isPlaying={this.props.isPlaying}
-                      onClickFunction={this.props.onPlayPauseIconClick.bind(this, track)}
-                      track={track}
-                      index={key}
-                      ></PlayIcons>
-                  </TableRowColumn>
-                  <TableRowColumn>
-                    <span style={{ fontSize: `${1.2}em` }}>
-                      <a href={track.permalink_url}>{track.title}</a>
-                    </span>
-                  </TableRowColumn>
-                  <TableRowColumn style={likesColumnStyles}>
-                    <span style={{ fontSize: `${1.2}em` }}>
-                      {track.likes_count.toLocaleString()}
-                    </span>
-                  </TableRowColumn>
-                  <TableRowColumn style={commentsColumnStyles}>
-                    <span style={{ fontSize: `${1.2}em` }}>
-                      {track.comment_count.toLocaleString()}
-                    </span>
-                  </TableRowColumn>
-                  <TableRowColumn style={durationColumnStyles}>
-                    <span style={{ fontSize: `${1.2}em` }}>
-                      {track.durationFormatted}
-                    </span>
-                  </TableRowColumn>
-                </TableRow>,
-              )
-            }
+            {tracks.map((track, key) =>
+              <TableRow key={key} className="tableRow" onDoubleClick={this.rowDoubleClickHelper.bind(this, track)}>
+                <TableRowColumn style={playIconColumnStyles}>
+                  <PlayIcons
+                    activeTrack={activeTrack}
+                    isPlaying={this.props.isPlaying}
+                    onClickFunction={this.props.onPlayPauseIconClick.bind(this, track)}
+                    track={track}
+                    index={key}
+                  />
+                </TableRowColumn>
+                <TableRowColumn>
+                  <span style={{ fontSize: `${1.2}em` }}>
+                    <a href={track.permalink_url}>
+                      {track.title}
+                    </a>
+                  </span>
+                </TableRowColumn>
+                <TableRowColumn style={likesColumnStyles}>
+                  <span style={{ fontSize: `${1.2}em` }}>
+                    {track.likes_count.toLocaleString()}
+                  </span>
+                </TableRowColumn>
+                <TableRowColumn style={commentsColumnStyles}>
+                  <span style={{ fontSize: `${1.2}em` }}>
+                    {track.comment_count.toLocaleString()}
+                  </span>
+                </TableRowColumn>
+                <TableRowColumn style={durationColumnStyles}>
+                  <span style={{ fontSize: `${1.2}em` }}>
+                    {track.durationFormatted}
+                  </span>
+                </TableRowColumn>
+              </TableRow>,
+            )}
           </TableBody>
         </Table>
-        <Player activeTrack={activeTrack}></Player>
+        <Player activeTrack={activeTrack} />
       </div>
     );
   }

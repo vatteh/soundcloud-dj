@@ -7,7 +7,7 @@ describe('TrackList', () => {
   };
 
   it('shows two elements', () => {
-    const element = shallow(<TrackList { ...props } />);
+    const element = shallow(<TrackList {...props} />);
 
     expect(element.find('.track')).to.have.length(2);
   });

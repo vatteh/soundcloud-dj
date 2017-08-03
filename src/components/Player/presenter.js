@@ -122,20 +122,18 @@ export default class Player extends Component {
                 className="fa fa-step-backward fa-2x"
                 aria-hidden="true"
                 style={styles.nextPrevSong}
-              ></i>
+              />
               <span onClick={onPlayPauseIconClick.bind(this, activeTrack)} style={styles.playPauseIcon}>
-                {
-                  isPlaying ?
-                  <i className="fa fa-pause-circle-o fa-4x" aria-hidden="true"></i> :
-                  <i className="fa fa-play-circle-o fa-4x" aria-hidden="true"></i>
-                }
+                {isPlaying
+                  ? <i className="fa fa-pause-circle-o fa-4x" aria-hidden="true" />
+                  : <i className="fa fa-play-circle-o fa-4x" aria-hidden="true" />}
               </span>
               <i
                 onClick={onPrevNextTrackIconClick.bind(this, activeTrack, 1)}
                 className="fa fa-step-forward fa-2x"
                 aria-hidden="true"
                 style={styles.nextPrevSong}
-              ></i>
+              />
             </div>
             <Slider
               min={0}
@@ -149,13 +147,16 @@ export default class Player extends Component {
           </div>
           <div style={styles.volumeControlContainer}>volume control</div>
         </div>
-        {
-          activeTrack ? <audio
-            id="audio"
-            ref={(element) => { this.audioElement = element; }}
-            src={`${activeTrack.stream_url}?client_id=${CLIENT_ID}`} /> : null
-        }
-    </div>
+        {activeTrack
+          ? <audio
+              id="audio"
+              ref={(element) => {
+                this.audioElement = element;
+              }}
+              src={`${activeTrack.stream_url}?client_id=${CLIENT_ID}`}
+            />
+          : null}
+      </div>
     );
   }
 }
