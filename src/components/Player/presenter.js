@@ -77,7 +77,7 @@ export default class Player extends Component {
     this.sliderThrottleTimeoutID = setTimeout(() => {
       this.sliderThrottleTimeoutID = null;
       onSliderDrag(value);
-    }, 250);
+    }, 350);
   }
 
   awaitSliderUpdate() {
@@ -95,21 +95,16 @@ export default class Player extends Component {
   }
 
   render() {
-    const {
-      activeTrack,
-      isPlaying,
-      currentTrackTime,
-      onPlayPauseIconClick,
-      onPrevNextTrackIconClick,
-      onSliderDrag,
-    } = this.props;
+    const { activeTrack, isPlaying, currentTrackTime, onPlayPauseIconClick, onPrevNextTrackIconClick } = this.props;
 
-    if (activeTrack && isPlaying && !this.sliderUpdateTimeoutID) {
+    if (isPlaying && !this.sliderUpdateTimeoutID) {
       this.awaitSliderUpdate();
-    } else if (this.sliderUpdateTimeoutID) {
+    } else if (!isPlaying && this.sliderUpdateTimeoutID) {
       clearTimeout(this.sliderUpdateTimeoutID);
       this.sliderUpdateTimeoutID = undefined;
     }
+
+    const durationSeconds = activeTrack ? Math.floor(activeTrack.duration / 1000) : 1;
 
     return (
       <div>
@@ -137,7 +132,7 @@ export default class Player extends Component {
             </div>
             <Slider
               min={0}
-              max={activeTrack ? activeTrack.duration : 1}
+              max={durationSeconds}
               step={1}
               value={currentTrackTime}
               onChange={this.onSliderChangeThrottle.bind(this)}

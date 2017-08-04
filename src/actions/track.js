@@ -83,7 +83,6 @@ export function fetchTracks() {
       .then(response => response.json())
       .then((data) => {
         data.collection.forEach((element) => {
-          element.duration = Math.floor(element.duration / 1000);
           element.durationFormatted = formatTime(element.duration);
         });
         dispatch(setTracks(data.collection));
