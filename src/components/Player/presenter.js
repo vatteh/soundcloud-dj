@@ -5,6 +5,7 @@ import FontIcon from 'material-ui/FontIcon';
 import { GridList } from 'material-ui/GridList';
 import Slider from 'material-ui/Slider';
 import CLIENT_ID from '../../constants/auth';
+import formatTime from '../../utils';
 
 const styles = {
   playerContainer: {
@@ -17,10 +18,9 @@ const styles = {
   },
   playControlsContainer: {
     display: 'flex',
+    flexGrow: 1,
     flexDirection: 'column',
-    justifyContent: 'flex-start',
     alignItems: 'center',
-    flexGrow: 2,
     textAlign: 'center',
   },
   volumeControlContainer: {
@@ -29,22 +29,21 @@ const styles = {
   controlButtons: {
     width: 150,
     display: 'flex',
-    flexGrow: 2,
     justifyContent: 'space-around',
     alignItems: 'center',
     marginTop: 10,
   },
+  sliderContainer: {
+    width: 725,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
   slider: {
-    flexGrow: 1,
     width: 600,
     marginTop: 10,
     marginBottom: 10,
-  },
-  playPauseIcon: {
-    flexGrow: 1,
-  },
-  nextPrevSong: {
-    flexGrow: 1,
   },
 };
 
@@ -104,7 +103,9 @@ export default class Player extends Component {
       this.sliderUpdateTimeoutID = undefined;
     }
 
-    const durationSeconds = activeTrack ? Math.floor(activeTrack.duration / 1000) : 1;
+    const totalDurationSeconds = activeTrack ? Math.floor(activeTrack.duration / 1000) : 1;
+    const currentTrackTimeDisplay = formatTime(currentTrackTime * 1000);
+    const remainingTrackTimeDisplay = formatTime((totalDurationSeconds - currentTrackTime) * 1000);
 
     return (
       <div>
@@ -116,9 +117,8 @@ export default class Player extends Component {
                 onClick={onPrevNextTrackIconClick.bind(this, activeTrack, -1)}
                 className="fa fa-step-backward fa-2x"
                 aria-hidden="true"
-                style={styles.nextPrevSong}
               />
-              <span onClick={onPlayPauseIconClick.bind(this, activeTrack)} style={styles.playPauseIcon}>
+              <span onClick={onPlayPauseIconClick.bind(this, activeTrack)}>
                 {isPlaying
                   ? <i className="fa fa-pause-circle-o fa-4x" aria-hidden="true" />
                   : <i className="fa fa-play-circle-o fa-4x" aria-hidden="true" />}
@@ -127,18 +127,25 @@ export default class Player extends Component {
                 onClick={onPrevNextTrackIconClick.bind(this, activeTrack, 1)}
                 className="fa fa-step-forward fa-2x"
                 aria-hidden="true"
-                style={styles.nextPrevSong}
               />
             </div>
-            <Slider
-              min={0}
-              max={durationSeconds}
-              step={1}
-              value={currentTrackTime}
-              onChange={this.onSliderChangeThrottle.bind(this)}
-              disableFocusRipple={true}
-              sliderStyle={styles.slider}
-            />
+            <div style={styles.sliderContainer}>
+              <span>
+                {currentTrackTimeDisplay}
+              </span>
+              <Slider
+                min={0}
+                max={totalDurationSeconds}
+                step={1}
+                value={currentTrackTime}
+                onChange={this.onSliderChangeThrottle.bind(this)}
+                disableFocusRipple={true}
+                sliderStyle={styles.slider}
+              />
+              <span>
+                {remainingTrackTimeDisplay}
+              </span>
+            </div>
           </div>
           <div style={styles.volumeControlContainer}>volume control</div>
         </div>
