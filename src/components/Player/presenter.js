@@ -4,6 +4,7 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCol
 import FontIcon from 'material-ui/FontIcon';
 import { GridList } from 'material-ui/GridList';
 import TrackSlider from '../TrackSlider';
+import ControlButtons from '../ControlButtons';
 import CLIENT_ID from '../../constants/auth';
 
 const styles = {
@@ -24,13 +25,6 @@ const styles = {
   },
   volumeControlContainer: {
     flexGrow: 1,
-  },
-  controlButtons: {
-    width: 150,
-    display: 'flex',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginTop: 10,
   },
 };
 
@@ -89,23 +83,12 @@ export default class Player extends Component {
         <div className={`player ${activeTrack ? 'player-visible' : ''}`} style={styles.playerContainer}>
           <div style={styles.nowPlayingContainer}>now playing</div>
           <div style={styles.playControlsContainer}>
-            <div style={styles.controlButtons}>
-              <i
-                onClick={onPrevNextTrackIconClick.bind(this, activeTrack, -1)}
-                className="fa fa-step-backward fa-2x"
-                aria-hidden="true"
-              />
-              <span onClick={onPlayPauseIconClick.bind(this, activeTrack)}>
-                {isPlaying
-                  ? <i className="fa fa-pause-circle-o fa-4x" aria-hidden="true" />
-                  : <i className="fa fa-play-circle-o fa-4x" aria-hidden="true" />}
-              </span>
-              <i
-                onClick={onPrevNextTrackIconClick.bind(this, activeTrack, 1)}
-                className="fa fa-step-forward fa-2x"
-                aria-hidden="true"
-              />
-            </div>
+            <ControlButtons
+              activeTrack={activeTrack}
+              isPlaying={isPlaying}
+              onPrevNextTrackIconClick={onPrevNextTrackIconClick}
+              onPlayPauseIconClick={onPlayPauseIconClick}
+            />
             <TrackSlider activeTrack={activeTrack} currentTrackTime={currentTrackTime} onSliderDrag={onSliderDrag} />
           </div>
           <div style={styles.volumeControlContainer}>volume control</div>
