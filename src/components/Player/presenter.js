@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import FontIcon from 'material-ui/FontIcon';
 import { GridList } from 'material-ui/GridList';
-import Slider from 'material-ui/Slider';
+import TrackSlider from '../TrackSlider';
 import CLIENT_ID from '../../constants/auth';
-import formatTime from '../../utils';
 
 const styles = {
   playerContainer: {
@@ -33,18 +32,6 @@ const styles = {
     alignItems: 'center',
     marginTop: 10,
   },
-  sliderContainer: {
-    width: 725,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  slider: {
-    width: 600,
-    marginTop: 10,
-    marginBottom: 10,
-  },
 };
 
 export default class Player extends Component {
@@ -66,19 +53,6 @@ export default class Player extends Component {
     }
   }
 
-  onSliderChangeThrottle(e, value) {
-    const { onSliderDrag } = this.props;
-
-    if (this.sliderThrottleTimeoutID) {
-      clearTimeout(this.sliderThrottleTimeoutID);
-    }
-
-    this.sliderThrottleTimeoutID = setTimeout(() => {
-      this.sliderThrottleTimeoutID = null;
-      onSliderDrag(value);
-    }, 350);
-  }
-
   awaitSliderUpdate() {
     const { onSliderUpdate } = this.props;
 
@@ -94,7 +68,14 @@ export default class Player extends Component {
   }
 
   render() {
-    const { activeTrack, isPlaying, currentTrackTime, onPlayPauseIconClick, onPrevNextTrackIconClick } = this.props;
+    const {
+      activeTrack,
+      isPlaying,
+      currentTrackTime,
+      onSliderDrag,
+      onPlayPauseIconClick,
+      onPrevNextTrackIconClick,
+    } = this.props;
 
     if (isPlaying && !this.sliderUpdateTimeoutID) {
       this.awaitSliderUpdate();
@@ -102,10 +83,6 @@ export default class Player extends Component {
       clearTimeout(this.sliderUpdateTimeoutID);
       this.sliderUpdateTimeoutID = undefined;
     }
-
-    const totalDurationSeconds = activeTrack ? Math.floor(activeTrack.duration / 1000) : 1;
-    const currentTrackTimeDisplay = formatTime(currentTrackTime * 1000);
-    const remainingTrackTimeDisplay = formatTime((totalDurationSeconds - currentTrackTime) * 1000);
 
     return (
       <div>
@@ -129,23 +106,7 @@ export default class Player extends Component {
                 aria-hidden="true"
               />
             </div>
-            <div style={styles.sliderContainer}>
-              <span>
-                {currentTrackTimeDisplay}
-              </span>
-              <Slider
-                min={0}
-                max={totalDurationSeconds}
-                step={1}
-                value={currentTrackTime}
-                onChange={this.onSliderChangeThrottle.bind(this)}
-                disableFocusRipple={true}
-                sliderStyle={styles.slider}
-              />
-              <span>
-                {remainingTrackTimeDisplay}
-              </span>
-            </div>
+            <TrackSlider activeTrack={activeTrack} currentTrackTime={currentTrackTime} onSliderDrag={onSliderDrag} />
           </div>
           <div style={styles.volumeControlContainer}>volume control</div>
         </div>
