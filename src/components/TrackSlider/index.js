@@ -4,14 +4,14 @@ import formatTime from '../../utils';
 
 const styles = {
   sliderContainer: {
-    width: 725,
+    width: 630,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
   },
   slider: {
-    width: 600,
+    width: 510,
     marginTop: 10,
     marginBottom: 10,
   },
@@ -50,7 +50,7 @@ function TrackSlider({ activeTrack, currentTrackTime, onSliderDrag }) {
         sliderStyle={styles.slider}
       />
       <span>
-        {remainingTrackTimeDisplay}
+        -{remainingTrackTimeDisplay}
       </span>
     </div>
   );

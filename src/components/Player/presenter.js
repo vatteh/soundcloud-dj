@@ -5,26 +5,23 @@ import FontIcon from 'material-ui/FontIcon';
 import { GridList } from 'material-ui/GridList';
 import TrackSlider from '../TrackSlider';
 import ControlButtons from '../ControlButtons';
+import NowPlaying from '../NowPlaying';
 import CLIENT_ID from '../../constants/auth';
 
 const styles = {
   playerContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  nowPlayingContainer: {
-    flexGrow: 1,
+    justifyContent: 'space-between',
   },
   playControlsContainer: {
     display: 'flex',
-    flexGrow: 1,
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
   },
   volumeControlContainer: {
-    flexGrow: 1,
+    width: 400,
   },
 };
 
@@ -81,7 +78,7 @@ export default class Player extends Component {
     return (
       <div>
         <div className={`player ${activeTrack ? 'player-visible' : ''}`} style={styles.playerContainer}>
-          <div style={styles.nowPlayingContainer}>now playing</div>
+          <NowPlaying activeTrack={activeTrack} />
           <div style={styles.playControlsContainer}>
             <ControlButtons
               activeTrack={activeTrack}
