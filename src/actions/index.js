@@ -8,12 +8,15 @@ import {
   updateTrackPlayhead,
 } from './track';
 
+import updateVolume from './volume';
+
 export {
-    fetchTracks,
-    setTracks,
-    playPauseTrack,
-    playTrack,
-    prevNextTrack,
-    updateSlider,
-    updateTrackPlayhead,
+  fetchTracks,
+  setTracks,
+  playPauseTrack,
+  playTrack,
+  prevNextTrack,
+  updateSlider,
+  updateTrackPlayhead,
+  updateVolume,
 };

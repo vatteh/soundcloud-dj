@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import FontIcon from 'material-ui/FontIcon';
 import { GridList } from 'material-ui/GridList';
+import Slider from 'material-ui/Slider';
 import TrackSlider from '../TrackSlider';
 import ControlButtons from '../ControlButtons';
 import NowPlaying from '../NowPlaying';
+import Volume from '../Volume';
 import CLIENT_ID from '../../constants/auth';
 
 const styles = {
@@ -19,9 +21,6 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
-  },
-  volumeControlContainer: {
-    width: 400,
   },
 };
 
@@ -88,7 +87,7 @@ export default class Player extends Component {
             />
             <TrackSlider activeTrack={activeTrack} currentTrackTime={currentTrackTime} onSliderDrag={onSliderDrag} />
           </div>
-          <div style={styles.volumeControlContainer}>volume control</div>
+          <Volume audioElement={this.audioElement} />
         </div>
         {activeTrack
           ? <audio
