@@ -49,20 +49,6 @@ export function prevNextTrack(currentTrack, increment) {
   };
 }
 
-export function updateSlider(newValue) {
-  return {
-    type: actionTypes.UPDATE_SLIDER,
-    currentTrackTime: newValue,
-  };
-}
-
-export function updateTrackPlayhead(newValue) {
-  return {
-    type: actionTypes.UPDATE_TRACK_PLAYHEAD,
-    currentTrackTime: newValue,
-  };
-}
-
 export function fetchTracks() {
   return (dispatch) => {
     fetch(`
