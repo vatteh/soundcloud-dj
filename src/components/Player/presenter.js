@@ -31,7 +31,12 @@ export default class Player extends Component {
       return;
     }
 
-    const { activeTrack, isPlaying, seekTo, currentTrackTime } = this.props;
+    const { activeTrack, isPlaying, seekTo, currentTrackTime, onPrevNextTrackIconClick } = this.props;
+
+    audioElement.onended = () => {
+      onPrevNextTrackIconClick(activeTrack, 1);
+    };
+
     if (seekTo) {
       audioElement.currentTime = currentTrackTime;
     }
