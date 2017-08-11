@@ -14,6 +14,23 @@ const durationColumnStyles = { width: 60 };
 class TrackList extends Component {
   componentDidMount() {
     this.props.onFetchTracks();
+    this.setupInfiniteScroll();
+  }
+
+  setupInfiniteScroll() {
+    this.timeoutID = null;
+    window.addEventListener('scroll', () => {
+      if (this.timeoutID) {
+        clearTimeout(this.timeoutID);
+      }
+
+      this.timeoutID = setTimeout(() => {
+        this.timeoutID = null;
+        if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+          this.props.onFetchTracks();
+        }
+      }, 500);
+    });
   }
 
   rowDoubleClickHelper(track, e) {

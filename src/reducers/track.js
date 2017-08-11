@@ -14,7 +14,7 @@ export default function (prevState = initialState, action) {
   switch (action.type) {
     case actionTypes.TRACKS_SET: {
       const { tracks } = action;
-      newState.tracks = tracks;
+      newState.tracks = [...prevState.tracks, ...tracks];
       return newState;
     }
     case actionTypes.TRACK_PLAY: {

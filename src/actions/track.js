@@ -4,6 +4,8 @@ import CLIENT_ID from '../constants/auth';
 import * as actionTypes from '../constants/actionTypes';
 import formatTime from '../utils';
 
+let trackOffset = 0;
+
 export function setTracks(tracks) {
   return {
     type: actionTypes.TRACKS_SET,
@@ -51,14 +53,17 @@ export function prevNextTrack(currentTrack, increment) {
 
 export function fetchTracks() {
   return (dispatch) => {
-    fetch(`
-      //api.soundcloud.com/tracks?linked_partitioning=1&limit=20&offset=0&tags=Tech%20House&client_id=${CLIENT_ID}`)
+    fetch(
+      `//api.soundcloud.com/tracks?linked_partitioning=1&limit=20&offset=${trackOffset}` +
+        `&tags=Tech%20House&client_id=${CLIENT_ID}`,
+    )
       .then(response => response.json())
       .then((data) => {
         data.collection.forEach((element) => {
           element.durationFormatted = formatTime(element.duration);
         });
         dispatch(setTracks(data.collection));
+        trackOffset += 20;
       });
   };
 }
