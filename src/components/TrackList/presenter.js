@@ -4,6 +4,7 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCol
 import FontIcon from 'material-ui/FontIcon';
 import PlayIcons from '../PlayIcons';
 import Player from '../Player';
+import AppToolbar from '../AppToolbar';
 import CLIENT_ID from '../../constants/auth';
 
 const playIconColumnStyles = { width: 50, height: 60 };
@@ -48,10 +49,11 @@ class TrackList extends Component {
   }
 
   render() {
-    const { tracks = [], activeTrack } = this.props;
+    const { tracks = [], activeTrack, onFetchTracks } = this.props;
 
     return (
       <div>
+        <AppToolbar onFetchTracks={onFetchTracks} />
         <Table fixedHeader={true}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>

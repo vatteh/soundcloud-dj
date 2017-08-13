@@ -13,8 +13,8 @@ export default function (prevState = initialState, action) {
 
   switch (action.type) {
     case actionTypes.TRACKS_SET: {
-      const { tracks } = action;
-      newState.tracks = [...prevState.tracks, ...tracks];
+      const { tracks, append } = action;
+      newState.tracks = append ? [...prevState.tracks, ...tracks] : [...tracks];
       return newState;
     }
     case actionTypes.TRACK_PLAY: {

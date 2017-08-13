@@ -4,12 +4,16 @@ import CLIENT_ID from '../constants/auth';
 import * as actionTypes from '../constants/actionTypes';
 import formatTime from '../utils';
 
+const LIMIT = 25;
+const baseURL = `//api.soundcloud.com/tracks?linked_partitioning=1&limit=${LIMIT}&client_id=${CLIENT_ID}`;
+const defaultTags = '&tags=Tech%20House';
 let trackOffset = 0;
 
-export function setTracks(tracks) {
+export function setTracks(tracks, append) {
   return {
     type: actionTypes.TRACKS_SET,
     tracks,
+    append,
   };
 }
 
@@ -51,19 +55,30 @@ export function prevNextTrack(currentTrack, increment) {
   };
 }
 
-export function fetchTracks() {
-  return (dispatch) => {
-    fetch(
-      `//api.soundcloud.com/tracks?linked_partitioning=1&limit=20&offset=${trackOffset}` +
-        `&tags=Tech%20House&client_id=${CLIENT_ID}`,
-    )
-      .then(response => response.json())
-      .then((data) => {
-        data.collection.forEach((element) => {
-          element.durationFormatted = formatTime(element.duration);
-        });
-        dispatch(setTracks(data.collection));
-        trackOffset += 20;
+export function fetchTracks(searchText) {
+  return (dispatch, getState) => {
+    if (searchText !== undefined) {
+      trackOffset = 0;
+    }
+    const offsetParam = `&offset=${trackOffset}`;
+
+    const state = getState();
+    let searchParam;
+    if (searchText) {
+      searchParam = `&q=${searchText}`;
+    } else if (state.toolbar && state.toolbar.searchText) {
+      searchParam = `&q=${state.toolbar.searchText}`;
+    } else {
+      searchParam = defaultTags;
+    }
+
+    const url = baseURL + searchParam + offsetParam;
+    fetch(url).then(response => response.json()).then((data) => {
+      data.collection.forEach((element) => {
+        element.durationFormatted = formatTime(element.duration);
       });
+      dispatch(setTracks(data.collection, searchText === undefined));
+      trackOffset += LIMIT;
+    });
   };
 }
