@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
+import AppBar from 'material-ui/AppBar';
 
 const styles = {
   searchIcon: {
@@ -21,13 +22,16 @@ export default class AppToolbar extends Component {
 
   render() {
     return (
-      <Toolbar>
-        <ToolbarTitle text="Soundcloud-DJ" />
-        <ToolbarGroup>
-          <i className="fa fa-search fa-lg" style={styles.searchIcon} aria-hidden="true" />
-          <TextField id="search-text-field" onKeyPress={this.onKeyPress.bind(this)} />
-        </ToolbarGroup>
-      </Toolbar>
+      <AppBar
+        title="Soundcloud-DJ"
+        showMenuIconButton={false}
+        iconElementRight={
+          <span>
+            <i className="fa fa-search fa-lg" style={styles.searchIcon} aria-hidden="true" />
+            <TextField id="search-text-field" onKeyPress={this.onKeyPress.bind(this)} />
+          </span>
+        }
+      />
     );
   }
 }

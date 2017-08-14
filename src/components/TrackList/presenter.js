@@ -19,15 +19,16 @@ class TrackList extends Component {
   }
 
   setupInfiniteScroll() {
+    const tableBodyElement = document.querySelector('tbody').parentNode.parentNode;
     this.timeoutID = null;
-    window.addEventListener('scroll', () => {
+    tableBodyElement.addEventListener('scroll', () => {
       if (this.timeoutID) {
         clearTimeout(this.timeoutID);
       }
 
       this.timeoutID = setTimeout(() => {
         this.timeoutID = null;
-        if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+        if (tableBodyElement.offsetHeight + tableBodyElement.scrollTop >= tableBodyElement.scrollHeight - 100) {
           this.props.onFetchTracks();
         }
       }, 500);
@@ -54,7 +55,7 @@ class TrackList extends Component {
     return (
       <div>
         <AppToolbar onFetchTracks={onFetchTracks} />
-        <Table fixedHeader={true}>
+        <Table fixedHeader={true} height={`${window.innerHeight - 250}px`}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
               <TableHeaderColumn style={playIconColumnStyles} />
