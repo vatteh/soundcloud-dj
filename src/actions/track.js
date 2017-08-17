@@ -2,12 +2,19 @@
 /* eslint no-param-reassign: ["error", { "props": false }]*/
 import CLIENT_ID from '../constants/auth';
 import * as actionTypes from '../constants/actionTypes';
-import formatTime from '../utils';
+import { formatTime } from '../utils';
 
 const LIMIT = 25;
 const baseURL = `//api.soundcloud.com/tracks?linked_partitioning=1&limit=${LIMIT}&client_id=${CLIENT_ID}`;
 const defaultTags = '&tags=Tech%20House';
 let trackOffset = 0;
+
+export function setSortBy(column) {
+  return {
+    type: actionTypes.UPDATE_SORT,
+    column,
+  };
+}
 
 export function setTracks(tracks, append) {
   return {

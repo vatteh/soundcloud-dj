@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from 'material-ui/Slider';
-import formatTime from '../../utils';
+import { formatTime } from '../../utils';
 
 const styles = {
   sliderContainer: {

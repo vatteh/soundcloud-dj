@@ -1,10 +1,15 @@
 import * as actionTypes from '../constants/actionTypes';
+import { sortColumnBy } from '../utils';
 
 const initialState = {
   tracks: [],
   activeTrack: null,
   isPlaying: false,
   currentTrackTime: 0,
+  sortBy: {
+    column: null,
+    direction: null,
+  },
 };
 
 export default function (prevState = initialState, action) {
@@ -46,6 +51,28 @@ export default function (prevState = initialState, action) {
     case actionTypes.UPDATE_SLIDER: {
       const { currentTrackTime } = action;
       newState.currentTrackTime = currentTrackTime;
+      return newState;
+    }
+    case actionTypes.UPDATE_SORT: {
+      const { column } = action;
+      let direction;
+      if (!column) {
+        direction = null;
+      } else if (prevState.sortBy.column !== column) {
+        direction = 'asc';
+      } else {
+        direction = prevState.sortBy.direction === 'asc' ? 'desc' : 'asc';
+      }
+
+      newState.sortBy = {
+        column,
+        direction,
+      };
+
+      if (column) {
+        newState.tracks.sort(sortColumnBy(column, direction));
+      }
+
       return newState;
     }
     default:

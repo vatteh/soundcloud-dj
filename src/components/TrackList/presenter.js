@@ -5,12 +5,14 @@ import FontIcon from 'material-ui/FontIcon';
 import PlayIcons from '../PlayIcons';
 import Player from '../Player';
 import AppToolbar from '../AppToolbar';
+import SortIcon from '../SortIcon';
 import CLIENT_ID from '../../constants/auth';
 
 const playIconColumnStyles = { width: 50, height: 60 };
 const likesColumnStyles = { width: 60 };
 const commentsColumnStyles = { width: 60 };
 const durationColumnStyles = { width: 60 };
+const columnTitleStyles = { marginRight: 5 };
 
 class TrackList extends Component {
   componentDidMount() {
@@ -49,24 +51,42 @@ class TrackList extends Component {
     }
   }
 
+  sortTableBy(e) {
+    const { onColumnHeaderClick } = this.props;
+
+    if (e.target.tagName === 'TH' && e.target.dataset) {
+      onColumnHeaderClick(e.target.dataset.sort);
+    } else if (e.target.parentNode.tagName === 'TH' && e.target.parentNode.dataset) {
+      onColumnHeaderClick(e.target.parentNode.dataset.sort);
+    }
+  }
+
   render() {
-    const { tracks = [], activeTrack, onFetchTracks } = this.props;
+    const { tracks = [], activeTrack, onFetchTracks, sortBy } = this.props;
 
     return (
       <div>
         <AppToolbar onFetchTracks={onFetchTracks} />
         <Table fixedHeader={true} height={`${window.innerHeight - 250}px`}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-            <TableRow>
+            <TableRow onClick={this.sortTableBy.bind(this)}>
               <TableHeaderColumn style={playIconColumnStyles} />
-              <TableHeaderColumn>Title</TableHeaderColumn>
-              <TableHeaderColumn style={likesColumnStyles}>
-                <i className="fa fa-heart fa-lg" aria-hidden="true" />
+              <TableHeaderColumn data-sort="title">
+                <span style={columnTitleStyles}>Title</span>
+                <SortIcon column={'title'} sortBy={sortBy}/>
               </TableHeaderColumn>
-              <TableHeaderColumn style={commentsColumnStyles}>
-                <i className="fa fa-comments fa-lg" aria-hidden="true" />
+              <TableHeaderColumn data-sort="likes_count" style={likesColumnStyles}>
+                <i className="fa fa-heart fa-lg" style={columnTitleStyles} aria-hidden="true" />
+                <SortIcon column={'likes_count'} sortBy={sortBy}/>
               </TableHeaderColumn>
-              <TableHeaderColumn style={durationColumnStyles}>Duration</TableHeaderColumn>
+              <TableHeaderColumn data-sort="comment_count" style={commentsColumnStyles}>
+                <i className="fa fa-comments fa-lg" style={columnTitleStyles} aria-hidden="true" />
+                <SortIcon column={'comment_count'} sortBy={sortBy}/>
+              </TableHeaderColumn>
+              <TableHeaderColumn data-sort="duration" style={durationColumnStyles}>
+                <span style={columnTitleStyles}>Duration</span>
+                <SortIcon column={'duration'} sortBy={sortBy}/>
+              </TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false} showRowHover={true}>
