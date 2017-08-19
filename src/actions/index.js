@@ -1,4 +1,4 @@
-import { setTracks, playPauseTrack, fetchTracks, playTrack, prevNextTrack, setSortBy } from './track';
+import { setTracks, playPauseTrack, fetchTracks, playTrack, prevNextTrack, setSortBy, fetchingTracks } from './track';
 import updateVolume from './volume';
 import { updateSlider, updateTrackPlayhead } from './slider';
 import updateSearchText from './toolbar';

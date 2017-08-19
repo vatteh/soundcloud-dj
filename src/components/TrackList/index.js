@@ -4,12 +4,13 @@ import * as actions from '../../actions';
 import TrackList from './presenter';
 
 function mapStateToProps(state) {
-  const { tracks, activeTrack, isPlaying, sortBy } = state.track;
+  const { tracks, activeTrack, isPlaying, sortBy, fetchingTracks } = state.track;
   return {
     tracks,
     activeTrack,
     isPlaying,
     sortBy,
+    fetchingTracks,
   };
 }
 

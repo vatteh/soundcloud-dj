@@ -6,6 +6,7 @@ const initialState = {
   activeTrack: null,
   isPlaying: false,
   currentTrackTime: 0,
+  fetchingTracks: false,
   sortBy: {
     column: null,
     direction: null,
@@ -17,9 +18,14 @@ export default function (prevState = initialState, action) {
   newState.seekTo = false;
 
   switch (action.type) {
+    case actionTypes.FETCHING_TRACKS: {
+      newState.fetchingTracks = true;
+      return newState;
+    }
     case actionTypes.TRACKS_SET: {
       const { tracks, append } = action;
       newState.tracks = append ? [...prevState.tracks, ...tracks] : [...tracks];
+      newState.fetchingTracks = false;
       return newState;
     }
     case actionTypes.TRACK_PLAY: {

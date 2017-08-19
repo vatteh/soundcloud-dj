@@ -24,6 +24,12 @@ export function setTracks(tracks, append) {
   };
 }
 
+export function fetchingTracks() {
+  return {
+    type: actionTypes.FETCHING_TRACKS,
+  };
+}
+
 export function playPauseTrack(selectedTrack) {
   return (dispatch, getState) => {
     const state = getState();
@@ -79,6 +85,7 @@ export function fetchTracks(searchText) {
       searchParam = defaultTags;
     }
 
+    dispatch(fetchingTracks());
     const url = baseURL + searchParam + offsetParam;
     fetch(url).then(response => response.json()).then((data) => {
       data.collection.forEach((element) => {

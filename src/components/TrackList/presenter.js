@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+import CircularProgress from 'material-ui/CircularProgress';
 import FontIcon from 'material-ui/FontIcon';
 import PlayIcons from '../PlayIcons';
 import Player from '../Player';
@@ -12,7 +13,15 @@ const playIconColumnStyles = { width: 50, height: 60 };
 const likesColumnStyles = { width: 60 };
 const commentsColumnStyles = { width: 60 };
 const durationColumnStyles = { width: 60 };
+const innerColumnStyle = { fontSize: `${1.2}em` };
 const columnTitleStyles = { marginRight: 5 };
+const loaderStyles = {
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: 50,
+  marginBottom: 150,
+  width: window.innerWidth,
+};
 
 class TrackList extends Component {
   componentDidMount() {
@@ -33,7 +42,7 @@ class TrackList extends Component {
         if (tableBodyElement.offsetHeight + tableBodyElement.scrollTop >= tableBodyElement.scrollHeight - 100) {
           this.props.onFetchTracks();
         }
-      }, 500);
+      }, 300);
     });
   }
 
@@ -62,30 +71,30 @@ class TrackList extends Component {
   }
 
   render() {
-    const { tracks = [], activeTrack, onFetchTracks, sortBy } = this.props;
+    const { tracks = [], activeTrack, onFetchTracks, sortBy, fetchingTracks } = this.props;
 
     return (
       <div>
         <AppToolbar onFetchTracks={onFetchTracks} />
-        <Table fixedHeader={true} height={`${window.innerHeight - 250}px`}>
+        <Table fixedHeader={true} height={`${window.innerHeight - 150}px`}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow onClick={this.sortTableBy.bind(this)}>
               <TableHeaderColumn style={playIconColumnStyles} />
               <TableHeaderColumn data-sort="title">
                 <span style={columnTitleStyles}>Title</span>
-                <SortIcon column={'title'} sortBy={sortBy}/>
+                <SortIcon column={'title'} sortBy={sortBy} />
               </TableHeaderColumn>
               <TableHeaderColumn data-sort="likes_count" style={likesColumnStyles}>
                 <i className="fa fa-heart fa-lg" style={columnTitleStyles} aria-hidden="true" />
-                <SortIcon column={'likes_count'} sortBy={sortBy}/>
+                <SortIcon column={'likes_count'} sortBy={sortBy} />
               </TableHeaderColumn>
               <TableHeaderColumn data-sort="comment_count" style={commentsColumnStyles}>
                 <i className="fa fa-comments fa-lg" style={columnTitleStyles} aria-hidden="true" />
-                <SortIcon column={'comment_count'} sortBy={sortBy}/>
+                <SortIcon column={'comment_count'} sortBy={sortBy} />
               </TableHeaderColumn>
               <TableHeaderColumn data-sort="duration" style={durationColumnStyles}>
                 <span style={columnTitleStyles}>Duration</span>
-                <SortIcon column={'duration'} sortBy={sortBy}/>
+                <SortIcon column={'duration'} sortBy={sortBy} />
               </TableHeaderColumn>
             </TableRow>
           </TableHeader>
@@ -102,29 +111,30 @@ class TrackList extends Component {
                   />
                 </TableRowColumn>
                 <TableRowColumn>
-                  <span style={{ fontSize: `${1.2}em` }}>
+                  <span style={innerColumnStyle}>
                     <a href={track.permalink_url}>
                       {track.title}
                     </a>
                   </span>
                 </TableRowColumn>
                 <TableRowColumn style={likesColumnStyles}>
-                  <span style={{ fontSize: `${1.2}em` }}>
+                  <span style={innerColumnStyle}>
                     {track.likes_count.toLocaleString()}
                   </span>
                 </TableRowColumn>
                 <TableRowColumn style={commentsColumnStyles}>
-                  <span style={{ fontSize: `${1.2}em` }}>
+                  <span style={innerColumnStyle}>
                     {track.comment_count.toLocaleString()}
                   </span>
                 </TableRowColumn>
                 <TableRowColumn style={durationColumnStyles}>
-                  <span style={{ fontSize: `${1.2}em` }}>
+                  <span style={innerColumnStyle}>
                     {track.durationFormatted}
                   </span>
                 </TableRowColumn>
               </TableRow>,
             )}
+            <CircularProgress size={70} thickness={7} style={loaderStyles} />
           </TableBody>
         </Table>
         <Player activeTrack={activeTrack} />
