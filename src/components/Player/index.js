@@ -5,9 +5,11 @@ import Player from './presenter';
 
 function mapStateToProps(state) {
   const { activeTrack, isPlaying, currentTrackTime, seekTo } = state.track;
+  const { onRepeat } = state.volume;
   return {
     activeTrack,
     isPlaying,
+    onRepeat,
     currentTrackTime,
     seekTo,
   };

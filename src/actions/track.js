@@ -57,12 +57,19 @@ export function playTrack(selectedTrack) {
 export function prevNextTrack(currentTrack, increment) {
   return (dispatch, getState) => {
     const state = getState();
-    const index = state.track.tracks.findIndex(track => track === currentTrack);
+    let index;
 
-    if (state.track.tracks[index + increment]) {
+    if (state.volume.onRandom && increment !== 0) {
+      index = Math.floor(Math.random() * state.track.tracks.length);
+    } else {
+      index = state.track.tracks.findIndex(track => track === currentTrack);
+      index += increment;
+    }
+
+    if (state.track.tracks[index]) {
       dispatch({
         type: actionTypes.TRACK_NEXT_PREV,
-        track: state.track.tracks[index + increment],
+        track: state.track.tracks[index],
       });
     }
   };

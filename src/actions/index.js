@@ -1,5 +1,5 @@
 import { setTracks, playPauseTrack, fetchTracks, playTrack, prevNextTrack, setSortBy, fetchingTracks } from './track';
-import updateVolume from './volume';
+import { updateVolume, toggleOnRepeat, toggleOnRandom } from './volume';
 import { updateSlider, updateTrackPlayhead } from './slider';
 import updateSearchText from './toolbar';
 
@@ -13,5 +13,7 @@ export {
   updateSlider,
   updateTrackPlayhead,
   updateVolume,
+  toggleOnRepeat,
+  toggleOnRandom,
   updateSearchText,
 };

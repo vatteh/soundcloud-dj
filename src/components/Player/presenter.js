@@ -31,10 +31,10 @@ export default class Player extends Component {
       return;
     }
 
-    const { activeTrack, isPlaying, seekTo, currentTrackTime, onPrevNextTrackIconClick } = this.props;
+    const { activeTrack, isPlaying, seekTo, onRepeat, currentTrackTime, onPrevNextTrackIconClick } = this.props;
 
     audioElement.onended = () => {
-      onPrevNextTrackIconClick(activeTrack, 1);
+      onPrevNextTrackIconClick(activeTrack, onRepeat ? 0 : 1);
     };
 
     if (seekTo) {
