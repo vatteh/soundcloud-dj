@@ -10,6 +10,7 @@ import SortIcon from '../SortIcon';
 import CLIENT_ID from '../../constants/auth';
 
 const playIconColumnStyles = { width: 50, height: 60 };
+const playsColumnStyles = { width: 80 };
 const likesColumnStyles = { width: 60 };
 const commentsColumnStyles = { width: 60 };
 const durationColumnStyles = { width: 60 };
@@ -84,6 +85,10 @@ class TrackList extends Component {
                 <span style={columnTitleStyles}>Title</span>
                 <SortIcon column={'title'} sortBy={sortBy} />
               </TableHeaderColumn>
+              <TableHeaderColumn data-sort="playback_count" style={playsColumnStyles}>
+                <span style={columnTitleStyles}>Plays</span>
+                <SortIcon column={'playback_count'} sortBy={sortBy} />
+              </TableHeaderColumn>
               <TableHeaderColumn data-sort="likes_count" style={likesColumnStyles}>
                 <i className="fa fa-heart fa-lg" style={columnTitleStyles} aria-hidden="true" />
                 <SortIcon column={'likes_count'} sortBy={sortBy} />
@@ -115,6 +120,11 @@ class TrackList extends Component {
                     <a href={track.permalink_url}>
                       {track.title}
                     </a>
+                  </span>
+                </TableRowColumn>
+                <TableRowColumn style={playsColumnStyles}>
+                  <span style={innerColumnStyle}>
+                    {track.playback_count.toLocaleString()}
                   </span>
                 </TableRowColumn>
                 <TableRowColumn style={likesColumnStyles}>
