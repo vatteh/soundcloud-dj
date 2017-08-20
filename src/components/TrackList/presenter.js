@@ -42,7 +42,7 @@ class TrackList extends Component {
         if (tableBodyElement.offsetHeight + tableBodyElement.scrollTop >= tableBodyElement.scrollHeight - 100) {
           this.props.onFetchTracks();
         }
-      }, 300);
+      }, 50);
     });
   }
 
@@ -134,7 +134,7 @@ class TrackList extends Component {
                 </TableRowColumn>
               </TableRow>,
             )}
-            <CircularProgress size={70} thickness={7} style={loaderStyles} />
+            {fetchingTracks && <CircularProgress size={70} thickness={7} style={loaderStyles} />}
           </TableBody>
         </Table>
         <Player activeTrack={activeTrack} />
