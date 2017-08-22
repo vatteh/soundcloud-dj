@@ -14,6 +14,7 @@ const playsColumnStyles = { width: 80 };
 const likesColumnStyles = { width: 60 };
 const commentsColumnStyles = { width: 60 };
 const durationColumnStyles = { width: 60 };
+const loaderColumnStyles = { overflow: 'visible' };
 const innerColumnStyle = { fontSize: `${1.2}em` };
 const columnTitleStyles = { marginRight: 5 };
 const loaderStyles = {
@@ -144,7 +145,11 @@ class TrackList extends Component {
                 </TableRowColumn>
               </TableRow>,
             )}
-            {fetchingTracks && <CircularProgress size={70} thickness={7} style={loaderStyles} />}
+            <TableRow className="tableRow">
+              <TableRowColumn className="tableColumn" style={loaderColumnStyles}>
+                {fetchingTracks && <CircularProgress size={70} thickness={7} style={loaderStyles} />}
+              </TableRowColumn>
+            </TableRow>
           </TableBody>
         </Table>
         <Player activeTrack={activeTrack} />
