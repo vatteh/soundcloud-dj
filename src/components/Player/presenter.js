@@ -13,14 +13,16 @@ import CLIENT_ID from '../../constants/auth';
 const styles = {
   playerContainer: {
     display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  playControlsContainer: {
-    display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
+  },
+  playControlsContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 70,
+    width: '100%',
   },
 };
 
@@ -91,8 +93,8 @@ export default class Player extends Component {
               onPlayPauseIconClick={onPlayPauseIconClick}
             />
             <TrackSlider activeTrack={activeTrack} currentTrackTime={currentTrackTime} onSliderDrag={onSliderDrag} />
+            <Volume audioElement={this.audioElement} />
           </div>
-          <Volume audioElement={this.audioElement} />
         </div>
         {activeTrack
           ? <audio

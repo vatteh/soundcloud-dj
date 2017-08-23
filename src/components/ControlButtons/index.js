@@ -2,11 +2,10 @@ import React from 'react';
 
 const styles = {
   controlButtons: {
-    width: 150,
+    width: 200,
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-    marginTop: 10,
   },
 };
 

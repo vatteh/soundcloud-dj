@@ -6,7 +6,7 @@ import { cyan500 } from 'material-ui/styles/colors';
 
 const styles = {
   container: {
-    width: 400,
+    width: 350,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',

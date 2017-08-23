@@ -4,14 +4,14 @@ import { formatTime } from '../../utils';
 
 const styles = {
   sliderContainer: {
-    width: 630,
+    width: 850,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
   },
   slider: {
-    width: 510,
+    width: 740,
     marginTop: 10,
     marginBottom: 10,
   },
