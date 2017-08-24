@@ -19,8 +19,8 @@ function ControlButtons({ activeTrack, isPlaying, onPrevNextTrackIconClick, onPl
       />
       <span onClick={onPlayPauseIconClick.bind(this, activeTrack)}>
         {isPlaying
-          ? <i className="fa fa-pause-circle-o fa-4x" aria-hidden="true" />
-          : <i className="fa fa-play-circle-o fa-4x" aria-hidden="true" />}
+          ? <i className="fa fa-pause fa-3x" aria-hidden="true" />
+          : <i className="fa fa-play fa-3x" aria-hidden="true" />}
       </span>
       <i
         onClick={onPrevNextTrackIconClick.bind(this, activeTrack, 1)}

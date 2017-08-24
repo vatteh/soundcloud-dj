@@ -140,7 +140,7 @@ class TrackList extends Component {
                 </TableRowColumn>
                 <TableRowColumn style={durationColumnStyles}>
                   <span style={innerColumnStyle}>
-                    {track.durationFormatted}
+                    {track.duration_formatted}
                   </span>
                 </TableRowColumn>
               </TableRow>,

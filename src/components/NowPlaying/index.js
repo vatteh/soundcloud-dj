@@ -8,7 +8,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     height: 70,
-    width: '99%',
+    width: '100%',
   },
   nowPlaying: {
     display: 'flex',
@@ -40,7 +40,7 @@ function NowPlaying({ activeTrack }) {
             <Marquee text={activeTrack.title} leading={1000} trailing={1000} loop={true} />
           </span>
         </div>
-        <span style={styles.createdAt}>{activeTrack.created_at}</span>
+        <span style={styles.createdAt}>{activeTrack.created_at_formatted}</span>
       </div>
     );
   }

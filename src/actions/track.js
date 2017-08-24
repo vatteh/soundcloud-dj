@@ -1,8 +1,8 @@
 /* eslint-env browser */
-/* eslint no-param-reassign: ["error", { "props": false }]*/
+/* eslint no-param-reassign: ["error", { "props": false }] */
 import CLIENT_ID from '../constants/auth';
 import * as actionTypes from '../constants/actionTypes';
-import { formatTime } from '../utils';
+import { formatTime, formatDate } from '../utils';
 
 const LIMIT = 25;
 const baseURL = `//api.soundcloud.com/tracks?linked_partitioning=1&limit=${LIMIT}&client_id=${CLIENT_ID}`;
@@ -96,7 +96,8 @@ export function fetchTracks(searchText) {
     const url = baseURL + searchParam + offsetParam;
     fetch(url).then(response => response.json()).then((data) => {
       data.collection.forEach((element) => {
-        element.durationFormatted = formatTime(element.duration);
+        element.duration_formatted = formatTime(element.duration);
+        element.created_at_formatted = formatDate(element.created_at);
       });
       dispatch(setTracks(data.collection, searchText === undefined));
       trackOffset += LIMIT;

@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export function formatTime(milliseconds) {
   const totalSeconds = Math.floor(milliseconds / 1000);
   const totalMinutes = Math.floor(totalSeconds / 60);
@@ -10,6 +12,10 @@ export function formatTime(milliseconds) {
   displaySeconds = displaySeconds < 10 ? `0${displaySeconds}` : displaySeconds;
 
   return `${displayHours}${displayMinutes}:${displaySeconds}`;
+}
+
+export function formatDate(dateString) {
+  return moment(dateString.split(' ')[0]).format('LL');
 }
 
 export function sortColumnBy(column, direction) {
