@@ -9,6 +9,7 @@ const styles = {
     alignItems: 'center',
     height: 70,
     width: '100%',
+    background: 'rgba(52, 58, 62, 0.95)',
   },
   nowPlaying: {
     display: 'flex',

@@ -23,6 +23,7 @@ const styles = {
     justifyContent: 'space-between',
     height: 70,
     width: '100%',
+    background: '#343a3e',
   },
 };
 

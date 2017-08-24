@@ -11,7 +11,7 @@ const styles = {
     alignItems: 'center',
   },
   slider: {
-    width: 740,
+    width: 730,
     marginTop: 10,
     marginBottom: 10,
   },

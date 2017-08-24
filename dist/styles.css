@@ -59,13 +59,13 @@ a:hover {
 }
 
 .player {
-  background: grey;
+  background: rgba(0, 0, 0, 0);
   position: fixed;
   right: 0;
   bottom: -140px;
   width: 100%;
   height: 140px;
-  border-top: 1px solid #3a3a3a;
+  border-top: 1px solid rgba(0, 0, 0, 0);
   z-index: 1;
   transition: bottom .2s;
   -webkit-transition: bottom .2s;
