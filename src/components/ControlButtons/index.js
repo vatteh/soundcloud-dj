@@ -1,4 +1,5 @@
 import React from 'react';
+import { highlightColor1 } from '../../constants/styles';
 
 const styles = {
   controlButtons: {
@@ -6,6 +7,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
+    color: highlightColor1,
   },
 };
 

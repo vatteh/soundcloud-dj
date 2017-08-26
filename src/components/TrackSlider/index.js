@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from 'material-ui/Slider';
 import { formatTime } from '../../utils';
+import { highlightColor3 } from '../../constants/styles';
 
 const styles = {
   sliderContainer: {
@@ -14,6 +15,9 @@ const styles = {
     width: 730,
     marginTop: 10,
     marginBottom: 10,
+  },
+  trackTimeDisplay: {
+    color: highlightColor3,
   },
 };
 
@@ -37,7 +41,7 @@ function TrackSlider({ activeTrack, currentTrackTime, onSliderDrag }) {
 
   return (
     <div style={styles.sliderContainer}>
-      <span>
+      <span style={styles.trackTimeDisplay}>
         {currentTrackTimeDisplay}
       </span>
       <Slider
@@ -49,7 +53,7 @@ function TrackSlider({ activeTrack, currentTrackTime, onSliderDrag }) {
         disableFocusRipple={true}
         sliderStyle={styles.slider}
       />
-      <span>
+      <span style={styles.trackTimeDisplay}>
         -{remainingTrackTimeDisplay}
       </span>
     </div>

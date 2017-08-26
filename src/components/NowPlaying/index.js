@@ -1,5 +1,6 @@
 import React from 'react';
 import Marquee from 'react-marquee';
+import { basePlayerColorTransparent, highlightColor1, highlightColor2, highlightColor3 } from '../../constants/styles';
 
 const styles = {
   nowPlayingContainer: {
@@ -9,7 +10,7 @@ const styles = {
     alignItems: 'center',
     height: 70,
     width: '100%',
-    background: 'rgba(52, 58, 62, 0.95)',
+    background: basePlayerColorTransparent,
   },
   nowPlaying: {
     display: 'flex',
@@ -17,16 +18,18 @@ const styles = {
     alignItems: 'center',
   },
   playerTrackTitle: {
-    margin: 10,
+    color: highlightColor2,
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
+    fontSize: `${1.2}em`,
   },
   trackImage: {
     height: 60,
     margin: 5,
   },
   createdAt: {
+    color: highlightColor3,
     marginRight: 5,
   },
 };
@@ -37,9 +40,9 @@ function NowPlaying({ activeTrack }) {
       <div style={styles.nowPlayingContainer}>
         <div style={styles.nowPlaying}>
           <img style={styles.trackImage} src={activeTrack.artwork_url} />
-          <span style={styles.playerTrackTitle}>
+          <a href={activeTrack.permalink_url} style={styles.playerTrackTitle}>
             <Marquee text={activeTrack.title} leading={1000} trailing={1000} loop={true} />
-          </span>
+          </a>
         </div>
         <span style={styles.createdAt}>{activeTrack.created_at_formatted}</span>
       </div>

@@ -9,6 +9,7 @@ import ControlButtons from '../ControlButtons';
 import NowPlaying from '../NowPlaying';
 import Volume from '../Volume';
 import CLIENT_ID from '../../constants/auth';
+import { basePlayerColor } from '../../constants/styles';
 
 const styles = {
   playerContainer: {
@@ -23,7 +24,7 @@ const styles = {
     justifyContent: 'space-between',
     height: 70,
     width: '100%',
-    background: '#343a3e',
+    background: basePlayerColor,
   },
 };
 

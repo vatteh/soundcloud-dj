@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import FontIcon from 'material-ui/FontIcon';
 import Slider from 'material-ui/Slider';
 import { cyan500 } from 'material-ui/styles/colors';
+import { highlightColor3 } from '../../constants/styles';
 
 const styles = {
   container: {
@@ -23,7 +24,9 @@ const styles = {
     margin: 6,
     float: 'right',
   },
-  volumeSliderIcon: {},
+  volumeSliderIcon: {
+    color: highlightColor3,
+  },
 };
 
 export default class Volume extends Component {
@@ -44,10 +47,10 @@ export default class Volume extends Component {
   render() {
     const { volumeValue, onRepeat, onRandom, onRepeatToggle, onRandomToggle } = this.props;
     const onRepeatIconStyle = {
-      color: onRepeat ? cyan500 : 'black',
+      color: onRepeat ? cyan500 : highlightColor3,
     };
     const onRandomIconStyle = {
-      color: onRandom ? cyan500 : 'black',
+      color: onRandom ? cyan500 : highlightColor3,
     };
 
     return (
