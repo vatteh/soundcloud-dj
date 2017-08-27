@@ -77,6 +77,19 @@ a:hover {
   -webkit-transition-timing-function: ease;
 }
 
-.player-visible {
+.playerVisible {
   bottom: 0px;
+}
+
+.playerExtended {
+  height: 280px;
+}
+
+.trackImageContainer {
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+}
+
+.trackImageContainer__onHover {
+  opacity: 0.8;
 }

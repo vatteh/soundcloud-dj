@@ -71,9 +71,11 @@ export default class Player extends Component {
       activeTrack,
       isPlaying,
       currentTrackTime,
+      nowPlayingExpanded,
       onSliderDrag,
       onPlayPauseIconClick,
       onPrevNextTrackIconClick,
+      onExpandClick,
     } = this.props;
 
     if (isPlaying && !this.sliderUpdateTimeoutID) {
@@ -85,8 +87,8 @@ export default class Player extends Component {
 
     return (
       <div>
-        <div className={`player ${activeTrack ? 'player-visible' : ''}`} style={styles.playerContainer}>
-          <NowPlaying activeTrack={activeTrack} />
+        <div className={`player ${activeTrack ? 'playerVisible' : ''}`} style={styles.playerContainer}>
+          <NowPlaying activeTrack={activeTrack} nowPlayingExpanded={nowPlayingExpanded} onExpandClick={onExpandClick} />
           <div style={styles.playControlsContainer}>
             <ControlButtons
               activeTrack={activeTrack}

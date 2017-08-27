@@ -2,6 +2,7 @@ import { setTracks, playPauseTrack, fetchTracks, playTrack, prevNextTrack, setSo
 import { updateVolume, toggleOnRepeat, toggleOnRandom } from './volume';
 import { updateSlider, updateTrackPlayhead } from './slider';
 import updateSearchText from './toolbar';
+import toggleExpandNowPlaying from './nowPlaying';
 
 export {
   fetchTracks,
@@ -16,4 +17,5 @@ export {
   toggleOnRepeat,
   toggleOnRandom,
   updateSearchText,
+  toggleExpandNowPlaying,
 };
