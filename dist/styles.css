@@ -63,33 +63,24 @@ a:hover {
 }
 
 .player {
-  background: rgba(0, 0, 0, 0);
-  position: fixed;
-  right: 0;
-  bottom: -140px;
-  width: 100%;
-  height: 140px;
-  border-top: 1px solid rgba(0, 0, 0, 0);
-  z-index: 1;
-  transition: bottom .2s;
-  -webkit-transition: bottom .2s;
-  transition-timing-function: ease;
-  -webkit-transition-timing-function: ease;
+  transition: bottom .2s, height .1s;
+  -webkit-transition: bottom .2s, height .1s;
+  transition-timing-function: ease-in;
+  -webkit-transition-timing-function: ease-in;
 }
 
-.playerVisible {
-  bottom: 0px;
+.nowPlayingContainer {
+  transition: height .1s;
+  -webkit-transition: height .1s;
+  transition-timing-function: ease-in;
+  -webkit-transition-timing-function: ease-in;
 }
 
-.playerExtended {
-  height: 280px;
-}
-
-.trackImageContainer {
+.trackImageExpandIcon {
   opacity: 0;
   transition: opacity 0.2s ease-in;
 }
 
-.trackImageContainer__onHover {
+.trackImageExpandIcon__onHover {
   opacity: 0.8;
 }

@@ -15,8 +15,15 @@ const styles = {
   playerContainer: {
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     textAlign: 'center',
+    background: 'rgba(0, 0, 0, 0)',
+    position: 'fixed',
+    right: 0,
+    width: '100%',
+    borderTop: '1px solid rgba(0, 0, 0, 0)',
+    zIndex: 1,
   },
   playControlsContainer: {
     display: 'flex',
@@ -85,9 +92,12 @@ export default class Player extends Component {
       this.sliderUpdateTimeoutID = undefined;
     }
 
+    styles.playerContainer.bottom = activeTrack ? 0 : -140;
+    styles.playerContainer.height = nowPlayingExpanded ? 280 : 140;
+
     return (
       <div>
-        <div className={`player ${activeTrack ? 'playerVisible' : ''}`} style={styles.playerContainer}>
+        <div className="player" style={styles.playerContainer}>
           <NowPlaying activeTrack={activeTrack} nowPlayingExpanded={nowPlayingExpanded} onExpandClick={onExpandClick} />
           <div style={styles.playControlsContainer}>
             <ControlButtons

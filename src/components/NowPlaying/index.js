@@ -16,6 +16,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    height: '100%',
   },
   playerTrackTitle: {
     color: highlightColor2,
@@ -25,12 +26,13 @@ const styles = {
     fontSize: `${1.2}em`,
   },
   trackImageContainer: {
-    height: 70,
+    height: '100%',
     position: 'relative',
   },
   trackImage: {
-    height: 60,
-    margin: 5,
+    height: '100%',
+    padding: 5,
+    boxSizing: 'border-box',
   },
   trackImageExpandIcon: {
     position: 'absolute',
@@ -46,20 +48,19 @@ const styles = {
 let trackImageExpandIcon;
 
 function onMouseEnterFunction() {
-  trackImageExpandIcon.classList.add('trackImageContainer__onHover');
+  trackImageExpandIcon.classList.add('trackImageExpandIcon__onHover');
 }
 
 function onMouseLeaveFunction() {
-  trackImageExpandIcon.classList.remove('trackImageContainer__onHover');
+  trackImageExpandIcon.classList.remove('trackImageExpandIcon__onHover');
 }
 
 function NowPlaying({ activeTrack, nowPlayingExpanded, onExpandClick }) {
   styles.nowPlayingContainer.height = nowPlayingExpanded ? 210 : 70;
-  styles.trackImageContainer.height = nowPlayingExpanded ? 210 : 70;
 
   if (activeTrack) {
     return (
-      <div style={styles.nowPlayingContainer}>
+      <div className="nowPlayingContainer" style={styles.nowPlayingContainer}>
         <div style={styles.nowPlaying}>
           <div
             style={styles.trackImageContainer}
@@ -69,7 +70,7 @@ function NowPlaying({ activeTrack, nowPlayingExpanded, onExpandClick }) {
           >
             <img style={styles.trackImage} src={activeTrack.artwork_url} />
             <i
-              className="fa fa-plus-square fa-2x trackImageContainer"
+              className={`fa ${nowPlayingExpanded ? 'fa-minus-square' : 'fa-plus-square'} fa-2x trackImageExpandIcon`}
               style={styles.trackImageExpandIcon}
               ref={(element) => {
                 trackImageExpandIcon = element;
