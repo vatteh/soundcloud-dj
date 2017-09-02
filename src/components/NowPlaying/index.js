@@ -1,5 +1,6 @@
 import React from 'react';
 import Marquee from 'react-marquee';
+import CommentsTimeline from '../CommentsTimeline';
 import { basePlayerColorTransparent, highlightColor1, highlightColor2, highlightColor3 } from '../../constants/styles';
 
 const styles = {
@@ -28,6 +29,12 @@ const styles = {
   trackImageContainer: {
     height: '100%',
     position: 'relative',
+  },
+  trackTitleCommentsContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    height: '100%',
   },
   trackImage: {
     height: '100%',
@@ -78,9 +85,12 @@ function NowPlaying({ activeTrack, nowPlayingExpanded, onExpandClick }) {
               aria-hidden="true"
             />
           </div>
-          <a href={activeTrack.permalink_url} style={styles.playerTrackTitle}>
-            <Marquee text={activeTrack.title} leading={1000} trailing={1000} loop={true} />
-          </a>
+          <div style={styles.trackTitleCommentsContainer}>
+            <a href={activeTrack.permalink_url} style={styles.playerTrackTitle}>
+              <Marquee text={activeTrack.title} leading={1000} trailing={1000} loop={true} />
+            </a>
+            {nowPlayingExpanded && <CommentsTimeline activeTrack={activeTrack} comments={[]} currentTrackTime={0} />}
+          </div>
         </div>
         <span style={styles.createdAt}>
           {activeTrack.created_at_formatted}
