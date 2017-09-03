@@ -13,11 +13,10 @@ const styles = {
     width: '100%',
     background: basePlayerColorTransparent,
   },
-  nowPlaying: {
+  playerTrackTitleContainer: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
-    height: '100%',
+    justifyContent: 'space-between',
   },
   playerTrackTitle: {
     color: highlightColor2,
@@ -29,12 +28,14 @@ const styles = {
   trackImageContainer: {
     height: '100%',
     position: 'relative',
+    cursor: 'pointer',
   },
   trackTitleCommentsContainer: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
     height: '100%',
+    width: '100%',
   },
   trackImage: {
     height: '100%',
@@ -62,39 +63,49 @@ function onMouseLeaveFunction() {
   trackImageExpandIcon.classList.remove('trackImageExpandIcon__onHover');
 }
 
+function TrackImage({ activeTrack, nowPlayingExpanded, onExpandClick }) {
+  return (
+    <div
+      style={styles.trackImageContainer}
+      onClick={onExpandClick}
+      onMouseEnter={onMouseEnterFunction}
+      onMouseLeave={onMouseLeaveFunction}
+    >
+      <img style={styles.trackImage} src={activeTrack.artwork_url} />
+      <i
+        className={`fa ${nowPlayingExpanded ? 'fa-minus-square' : 'fa-plus-square'} fa-2x trackImageExpandIcon`}
+        style={styles.trackImageExpandIcon}
+        ref={(element) => {
+          trackImageExpandIcon = element;
+        }}
+        aria-hidden="true"
+      />
+    </div>
+  );
+}
+
+TrackImage.propTypes = {
+  activeTrack: React.PropTypes.object,
+  nowPlayingExpanded: React.PropTypes.bool,
+  onExpandClick: React.PropTypes.function,
+};
+
 function NowPlaying({ activeTrack, nowPlayingExpanded, onExpandClick }) {
   styles.nowPlayingContainer.height = nowPlayingExpanded ? 210 : 70;
 
   if (activeTrack) {
     return (
       <div className="nowPlayingContainer" style={styles.nowPlayingContainer}>
-        <div style={styles.nowPlaying}>
-          <div
-            style={styles.trackImageContainer}
-            onClick={onExpandClick}
-            onMouseEnter={onMouseEnterFunction}
-            onMouseLeave={onMouseLeaveFunction}
-          >
-            <img style={styles.trackImage} src={activeTrack.artwork_url} />
-            <i
-              className={`fa ${nowPlayingExpanded ? 'fa-minus-square' : 'fa-plus-square'} fa-2x trackImageExpandIcon`}
-              style={styles.trackImageExpandIcon}
-              ref={(element) => {
-                trackImageExpandIcon = element;
-              }}
-              aria-hidden="true"
-            />
-          </div>
-          <div style={styles.trackTitleCommentsContainer}>
+        <TrackImage activeTrack={activeTrack} nowPlayingExpanded={nowPlayingExpanded} onExpandClick={onExpandClick} />
+        <div style={styles.trackTitleCommentsContainer}>
+          <div style={styles.playerTrackTitleContainer}>
             <a href={activeTrack.permalink_url} style={styles.playerTrackTitle}>
               <Marquee text={activeTrack.title} leading={1000} trailing={1000} loop={true} />
             </a>
-            {nowPlayingExpanded && <CommentsTimeline activeTrack={activeTrack} comments={[]} currentTrackTime={0} />}
+            <span style={styles.createdAt}>{activeTrack.created_at_formatted}</span>
           </div>
+          {nowPlayingExpanded && <CommentsTimeline activeTrack={activeTrack} comments={[]} currentTrackTime={0} />}
         </div>
-        <span style={styles.createdAt}>
-          {activeTrack.created_at_formatted}
-        </span>
       </div>
     );
   }
@@ -104,6 +115,8 @@ function NowPlaying({ activeTrack, nowPlayingExpanded, onExpandClick }) {
 
 NowPlaying.propTypes = {
   activeTrack: React.PropTypes.object,
+  nowPlayingExpanded: React.PropTypes.bool,
+  onExpandClick: React.PropTypes.function,
 };
 
 export default NowPlaying;

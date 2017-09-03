@@ -3,6 +3,7 @@ import React from 'react';
 const styles = {
   waveformUrl: {
     height: 150,
+    width: '100%',
   },
 };
 
