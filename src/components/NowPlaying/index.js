@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Marquee from 'react-marquee';
+import * as actions from '../../actions';
 import CommentsTimeline from '../CommentsTimeline';
 import { basePlayerColorTransparent, highlightColor1, highlightColor2, highlightColor3 } from '../../constants/styles';
 
@@ -87,11 +89,14 @@ function TrackImage({ activeTrack, nowPlayingExpanded, onExpandClick }) {
 TrackImage.propTypes = {
   activeTrack: React.PropTypes.object,
   nowPlayingExpanded: React.PropTypes.bool,
-  onExpandClick: React.PropTypes.function,
+  onExpandClick: React.PropTypes.func,
 };
 
-function NowPlaying({ activeTrack, nowPlayingExpanded, onExpandClick }) {
+function NowPlaying({ activeTrack, nowPlayingExpanded, comments, onFetchComments, onExpandClick }) {
   styles.nowPlayingContainer.height = nowPlayingExpanded ? 210 : 70;
+  if (nowPlayingExpanded && !comments) {
+    onFetchComments(activeTrack.id);
+  }
 
   if (activeTrack) {
     return (
@@ -104,7 +109,7 @@ function NowPlaying({ activeTrack, nowPlayingExpanded, onExpandClick }) {
             </a>
             <span style={styles.createdAt}>{activeTrack.created_at_formatted}</span>
           </div>
-          {nowPlayingExpanded && <CommentsTimeline activeTrack={activeTrack} comments={[]} currentTrackTime={0} />}
+          {nowPlayingExpanded && <CommentsTimeline />}
         </div>
       </div>
     );
@@ -116,7 +121,19 @@ function NowPlaying({ activeTrack, nowPlayingExpanded, onExpandClick }) {
 NowPlaying.propTypes = {
   activeTrack: React.PropTypes.object,
   nowPlayingExpanded: React.PropTypes.bool,
-  onExpandClick: React.PropTypes.function,
+  comments: React.PropTypes.array,
+  onFetchComments: React.PropTypes.func,
+  onExpandClick: React.PropTypes.func,
 };
 
-export default NowPlaying;
+export default connect(
+  state => ({
+    activeTrack: state.track.activeTrack,
+    nowPlayingExpanded: state.nowPlaying.nowPlayingExpanded,
+    comments: state.nowPlaying.comments,
+  }),
+  dispatch => ({
+    onFetchComments: trackId => dispatch(actions.fetchComments(trackId)),
+    onExpandClick: () => dispatch(actions.toggleExpandNowPlaying()),
+  }),
+)(NowPlaying);

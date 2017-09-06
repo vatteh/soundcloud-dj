@@ -82,7 +82,6 @@ export default class Player extends Component {
       onSliderDrag,
       onPlayPauseIconClick,
       onPrevNextTrackIconClick,
-      onExpandClick,
     } = this.props;
 
     if (isPlaying && !this.sliderUpdateTimeoutID) {
@@ -98,7 +97,7 @@ export default class Player extends Component {
     return (
       <div>
         <div className="player" style={styles.playerContainer}>
-          <NowPlaying activeTrack={activeTrack} nowPlayingExpanded={nowPlayingExpanded} onExpandClick={onExpandClick} />
+          <NowPlaying />
           <div style={styles.playControlsContainer}>
             <ControlButtons
               activeTrack={activeTrack}
@@ -110,15 +109,15 @@ export default class Player extends Component {
             <Volume audioElement={this.audioElement} />
           </div>
         </div>
-        {activeTrack
-          ? <audio
-              id="audio"
-              ref={(element) => {
-                this.audioElement = element;
-              }}
-              src={`${activeTrack.stream_url}?client_id=${CLIENT_ID}`}
-            />
-          : null}
+        {activeTrack ? (
+          <audio
+            id="audio"
+            ref={(element) => {
+              this.audioElement = element;
+            }}
+            src={`${activeTrack.stream_url}?client_id=${CLIENT_ID}`}
+          />
+        ) : null}
       </div>
     );
   }

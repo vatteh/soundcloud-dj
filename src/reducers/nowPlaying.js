@@ -2,6 +2,7 @@ import * as actionTypes from '../constants/actionTypes';
 
 const initialState = {
   nowPlayingExpanded: false,
+  comments: null,
 };
 
 export default function (prevState = initialState, action) {
@@ -10,6 +11,10 @@ export default function (prevState = initialState, action) {
   switch (action.type) {
     case actionTypes.TOGGLE_EXPAND_NOW_PLAYING: {
       newState.nowPlayingExpanded = !newState.nowPlayingExpanded;
+      return newState;
+    }
+    case actionTypes.FETCH_COMMENTS: {
+      console.log('FETCH_COMMENTS');
       return newState;
     }
     default:

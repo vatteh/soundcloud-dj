@@ -1,18 +1,15 @@
 import React from 'react';
 
 const styles = {
-  waveformUrl: {
+  commentsTimelineContainer: {
     height: 150,
     width: '100%',
+    overflow: 'scroll',
   },
 };
 
 function CommentsTimeline({ activeTrack, comments, currentTrackTime }) {
-  return (
-    <div>
-      <img style={styles.waveformUrl} src={activeTrack.waveform_url} />
-    </div>
-  );
+  return <div style={styles.commentsTimelineContainer} />;
 }
 
 CommentsTimeline.propTypes = {

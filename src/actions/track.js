@@ -94,13 +94,15 @@ export function fetchTracks(searchText) {
 
     dispatch(fetchingTracks());
     const url = baseURL + searchParam + offsetParam;
-    fetch(url).then(response => response.json()).then((data) => {
-      data.collection.forEach((element) => {
-        element.duration_formatted = formatTime(element.duration);
-        element.created_at_formatted = formatDate(element.created_at);
+    fetch(url)
+      .then(response => response.json())
+      .then((data) => {
+        data.collection.forEach((element) => {
+          element.duration_formatted = formatTime(element.duration);
+          element.created_at_formatted = formatDate(element.created_at);
+        });
+        dispatch(setTracks(data.collection, searchText === undefined));
+        trackOffset += LIMIT;
       });
-      dispatch(setTracks(data.collection, searchText === undefined));
-      trackOffset += LIMIT;
-    });
   };
 }
