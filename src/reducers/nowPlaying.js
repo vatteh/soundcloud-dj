@@ -14,7 +14,11 @@ export default function (prevState = initialState, action) {
       return newState;
     }
     case actionTypes.FETCH_COMMENTS: {
-      console.log('FETCH_COMMENTS');
+      newState.comments = action.comments;
+      return newState;
+    }
+    case actionTypes.RESET_COMMENTS: {
+      newState.comments = null;
       return newState;
     }
     default:

@@ -1,5 +1,4 @@
 /* eslint-env browser */
-/* eslint no-param-reassign: ["error", { "props": false }] */
 import CLIENT_ID from '../constants/auth';
 import * as actionTypes from '../constants/actionTypes';
 import { formatTime, formatDate } from '../utils';
@@ -35,6 +34,12 @@ export function playPauseTrack(selectedTrack) {
     const state = getState();
 
     if (state.track.activeTrack !== selectedTrack || !state.track.isPlaying) {
+      if (state.track.activeTrack !== selectedTrack) {
+        dispatch({
+          type: actionTypes.RESET_COMMENTS,
+        });
+      }
+
       dispatch({
         type: actionTypes.TRACK_PLAY,
         track: selectedTrack,
@@ -48,9 +53,17 @@ export function playPauseTrack(selectedTrack) {
 }
 
 export function playTrack(selectedTrack) {
-  return {
-    type: actionTypes.TRACK_PLAY,
-    track: selectedTrack,
+  return (dispatch, getState) => {
+    if (getState().track.activeTrack !== selectedTrack) {
+      dispatch({
+        type: actionTypes.RESET_COMMENTS,
+      });
+    }
+
+    dispatch({
+      type: actionTypes.TRACK_PLAY,
+      track: selectedTrack,
+    });
   };
 }
 
@@ -67,6 +80,12 @@ export function prevNextTrack(currentTrack, increment) {
     }
 
     if (state.track.tracks[index]) {
+      if (increment !== 0) {
+        dispatch({
+          type: actionTypes.RESET_COMMENTS,
+        });
+      }
+
       dispatch({
         type: actionTypes.TRACK_NEXT_PREV,
         track: state.track.tracks[index],

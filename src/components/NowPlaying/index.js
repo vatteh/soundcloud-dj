@@ -56,6 +56,7 @@ const styles = {
 };
 
 let trackImageExpandIcon;
+let fetchingComments = false;
 
 function onMouseEnterFunction() {
   trackImageExpandIcon.classList.add('trackImageExpandIcon__onHover');
@@ -94,8 +95,11 @@ TrackImage.propTypes = {
 
 function NowPlaying({ activeTrack, nowPlayingExpanded, comments, onFetchComments, onExpandClick }) {
   styles.nowPlayingContainer.height = nowPlayingExpanded ? 210 : 70;
-  if (nowPlayingExpanded && !comments) {
+  if (nowPlayingExpanded && !comments && !fetchingComments) {
+    fetchingComments = true;
     onFetchComments(activeTrack.id);
+  } else {
+    fetchingComments = false;
   }
 
   if (activeTrack) {
@@ -133,7 +137,7 @@ export default connect(
     comments: state.nowPlaying.comments,
   }),
   dispatch => ({
-    onFetchComments: trackId => dispatch(actions.fetchComments(trackId)),
+    onFetchComments: () => dispatch(actions.fetchComments()),
     onExpandClick: () => dispatch(actions.toggleExpandNowPlaying()),
   }),
 )(NowPlaying);
