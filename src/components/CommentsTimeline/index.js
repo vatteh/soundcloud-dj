@@ -50,7 +50,7 @@ const styles = {
 function CommentsTimeline({ activeTrack, comments, currentTrackTime }) {
   return (
     <div>
-      <div style={styles.tagList}>Tags: {activeTrack.tag_list}</div>
+      {activeTrack.tag_list && <div style={styles.tagList}>Tags: {activeTrack.tag_list}</div>}
       <div style={styles.commentsTimelineContainer}>
         {comments && comments.length ? (
           comments.map(comment => (
