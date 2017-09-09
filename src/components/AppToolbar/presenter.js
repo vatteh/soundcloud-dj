@@ -23,6 +23,7 @@ export default class AppToolbar extends Component {
     const { onFetchTracks, updateSearchText } = this.props;
 
     if (e.key === 'Enter') {
+      document.querySelector('tbody').scrollIntoView();
       updateSearchText(e.target.value);
       onFetchTracks(e.target.value);
       e.target.value = '';
