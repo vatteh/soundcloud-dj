@@ -42,6 +42,9 @@ const styles = {
     color: highlightColor3,
     fontSize: 12,
   },
+  loader: {
+    marginTop: 45,
+  },
 };
 
 function CommentsTimeline({ activeTrack, comments, currentTrackTime }) {
@@ -56,7 +59,6 @@ function CommentsTimeline({ activeTrack, comments, currentTrackTime }) {
                 <a data-tip data-for={comment.user.username}>
                   <img style={styles.avatar} src={comment.user.avatar_url} />
                 </a>
-
                 <ReactTooltip place="top" type="dark" effect="float" id={comment.user.username}>
                   <div>{comment.user.username}</div>
                 </ReactTooltip>
@@ -67,7 +69,7 @@ function CommentsTimeline({ activeTrack, comments, currentTrackTime }) {
             </div>
           ))
         ) : (
-          <CircularProgress size={60} thickness={6} />
+          <CircularProgress size={60} thickness={6} style={styles.loader} />
         )}
       </div>
     </div>
