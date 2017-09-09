@@ -10,10 +10,11 @@ import SortIcon from '../SortIcon';
 import CLIENT_ID from '../../constants/auth';
 
 const playIconColumnStyles = { width: 50, height: 60 };
-const playsColumnStyles = { width: 80 };
-const likesColumnStyles = { width: 60 };
-const commentsColumnStyles = { width: 60 };
-const durationColumnStyles = { width: 60 };
+const titleColumnStyles = { cursor: 'pointer' };
+const playsColumnStyles = { width: 80, cursor: 'pointer' };
+const likesColumnStyles = { width: 60, cursor: 'pointer' };
+const commentsColumnStyles = { width: 60, cursor: 'pointer' };
+const durationColumnStyles = { width: 60, cursor: 'pointer' };
 const loaderColumnStyles = { overflow: 'visible' };
 const innerColumnStyle = { fontSize: `${1.2}em` };
 const columnTitleStyles = { marginRight: 5 };
@@ -82,7 +83,7 @@ class TrackList extends Component {
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow onClick={this.sortTableBy.bind(this)}>
               <TableHeaderColumn style={playIconColumnStyles} />
-              <TableHeaderColumn data-sort="title">
+              <TableHeaderColumn data-sort="title" style={titleColumnStyles}>
                 <span style={columnTitleStyles}>Title</span>
                 <SortIcon column={'title'} sortBy={sortBy} />
               </TableHeaderColumn>
@@ -105,7 +106,7 @@ class TrackList extends Component {
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false} showRowHover={true}>
-            {tracks.map((track, key) =>
+            {tracks.map((track, key) => (
               <TableRow key={key} className="tableRow" onDoubleClick={this.rowDoubleClickHelper.bind(this, track)}>
                 <TableRowColumn style={playIconColumnStyles}>
                   <PlayIcons
@@ -118,33 +119,23 @@ class TrackList extends Component {
                 </TableRowColumn>
                 <TableRowColumn>
                   <span style={innerColumnStyle}>
-                    <a href={track.permalink_url}>
-                      {track.title}
-                    </a>
+                    <a href={track.permalink_url}>{track.title}</a>
                   </span>
                 </TableRowColumn>
                 <TableRowColumn style={playsColumnStyles}>
-                  <span style={innerColumnStyle}>
-                    {track.playback_count.toLocaleString()}
-                  </span>
+                  <span style={innerColumnStyle}>{track.playback_count.toLocaleString()}</span>
                 </TableRowColumn>
                 <TableRowColumn style={likesColumnStyles}>
-                  <span style={innerColumnStyle}>
-                    {track.likes_count.toLocaleString()}
-                  </span>
+                  <span style={innerColumnStyle}>{track.likes_count.toLocaleString()}</span>
                 </TableRowColumn>
                 <TableRowColumn style={commentsColumnStyles}>
-                  <span style={innerColumnStyle}>
-                    {track.comment_count.toLocaleString()}
-                  </span>
+                  <span style={innerColumnStyle}>{track.comment_count.toLocaleString()}</span>
                 </TableRowColumn>
                 <TableRowColumn style={durationColumnStyles}>
-                  <span style={innerColumnStyle}>
-                    {track.duration_formatted}
-                  </span>
+                  <span style={innerColumnStyle}>{track.duration_formatted}</span>
                 </TableRowColumn>
-              </TableRow>,
-            )}
+              </TableRow>
+            ))}
             <TableRow className="tableRow">
               <TableRowColumn className="tableColumn" style={loaderColumnStyles}>
                 {fetchingTracks && <CircularProgress size={70} thickness={7} style={loaderStyles} />}
