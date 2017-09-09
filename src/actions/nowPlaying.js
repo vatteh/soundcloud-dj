@@ -1,6 +1,6 @@
 import CLIENT_ID from '../constants/auth';
 import * as actionTypes from '../constants/actionTypes';
-import { formatDate } from '../utils';
+import { formatTime, formatDate } from '../utils';
 
 const LIMIT = 25;
 
@@ -27,7 +27,8 @@ export function fetchComments() {
     fetch(commentsURL(state.track.activeTrack.id, CLIENT_ID))
       .then(response => response.json())
       .then((data) => {
-        data.forEach((element) => {
+        data.sort((a, b) => a.timestamp - b.timestamp).forEach((element) => {
+          element.timestamp_formatted = formatTime(element.timestamp);
           element.created_at_formatted = formatDate(element.created_at);
         });
         dispatch(setComments(data));
