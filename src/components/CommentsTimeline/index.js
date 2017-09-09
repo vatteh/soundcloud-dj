@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
+import CircularProgress from 'material-ui/CircularProgress';
 import * as actions from '../../actions';
 import { basePlayerColorTransparent, highlightColor1, highlightColor2, highlightColor3 } from '../../constants/styles';
 
@@ -44,12 +45,12 @@ const styles = {
 };
 
 function CommentsTimeline({ activeTrack, comments, currentTrackTime }) {
-  if (comments && comments.length) {
-    return (
-      <div>
-        <div style={styles.tagList}>Tags: {activeTrack.tag_list}</div>
-        <div style={styles.commentsTimelineContainer}>
-          {comments.map(comment => (
+  return (
+    <div>
+      <div style={styles.tagList}>Tags: {activeTrack.tag_list}</div>
+      <div style={styles.commentsTimelineContainer}>
+        {comments && comments.length ? (
+          comments.map(comment => (
             <div key={comment.id} style={styles.commentContainer}>
               <div style={styles.avatarContainer}>
                 <a data-tip data-for={comment.user.username}>
@@ -64,13 +65,13 @@ function CommentsTimeline({ activeTrack, comments, currentTrackTime }) {
                 {comment.body} - {comment.timestamp_formatted}
               </span>
             </div>
-          ))}
-        </div>
+          ))
+        ) : (
+          <CircularProgress size={60} thickness={6} />
+        )}
       </div>
-    );
-  }
-
-  return null;
+    </div>
+  );
 }
 
 CommentsTimeline.propTypes = {
