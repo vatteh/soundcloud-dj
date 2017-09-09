@@ -34,28 +34,38 @@ const styles = {
   commentBody: {
     fontSize: 14,
   },
+  tagList: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    textAlign: 'left',
+    color: highlightColor3,
+    fontSize: 12,
+  },
 };
 
 function CommentsTimeline({ activeTrack, comments, currentTrackTime }) {
   if (comments && comments.length) {
     return (
-      <div style={styles.commentsTimelineContainer}>
-        {comments.map(comment => (
-          <div key={comment.id} style={styles.commentContainer}>
-            <div style={styles.avatarContainer}>
-              <a data-tip data-for={comment.user.username}>
-                <img style={styles.avatar} src={comment.user.avatar_url} />
-              </a>
+      <div>
+        <div style={styles.tagList}>Tags: {activeTrack.tag_list}</div>
+        <div style={styles.commentsTimelineContainer}>
+          {comments.map(comment => (
+            <div key={comment.id} style={styles.commentContainer}>
+              <div style={styles.avatarContainer}>
+                <a data-tip data-for={comment.user.username}>
+                  <img style={styles.avatar} src={comment.user.avatar_url} />
+                </a>
 
-              <ReactTooltip place="top" type="dark" effect="float" id={comment.user.username}>
-                <div>{comment.user.username}</div>
-              </ReactTooltip>
+                <ReactTooltip place="top" type="dark" effect="float" id={comment.user.username}>
+                  <div>{comment.user.username}</div>
+                </ReactTooltip>
+              </div>
+              <span style={styles.commentBody}>
+                {comment.body} - {comment.timestamp_formatted}
+              </span>
             </div>
-            <span style={styles.commentBody}>
-              {comment.body} - {comment.timestamp_formatted}
-            </span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     );
   }
