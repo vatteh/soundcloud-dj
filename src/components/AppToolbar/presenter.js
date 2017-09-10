@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import AppBar from 'material-ui/AppBar';
+import { highlightColor1 } from '../../constants/styles';
 
 const styles = {
   searchIcon: {
@@ -15,6 +16,7 @@ const styles = {
   },
   searchedFor: {
     marginRight: 10,
+    color: highlightColor1,
   },
 };
 
