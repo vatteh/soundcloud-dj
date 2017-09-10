@@ -15,6 +15,18 @@ export default function (prevState = initialState, action) {
     }
     case actionTypes.FETCH_COMMENTS: {
       newState.comments = action.comments;
+      newState.commentsByTimestamp = {};
+
+      action.comments.forEach((comment) => {
+        const timeStamp = Math.floor(comment.timestamp / 1000);
+
+        if (newState.commentsByTimestamp[timeStamp]) {
+          newState.commentsByTimestamp[timeStamp].push(comment);
+        } else {
+          newState.commentsByTimestamp[timeStamp] = [comment];
+        }
+      });
+
       return newState;
     }
     case actionTypes.RESET_COMMENTS: {

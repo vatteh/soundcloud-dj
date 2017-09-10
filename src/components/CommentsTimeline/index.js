@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import CircularProgress from 'material-ui/CircularProgress';
 import * as actions from '../../actions';
-import { basePlayerColorTransparent, highlightColor1, highlightColor2, highlightColor3 } from '../../constants/styles';
+import { highlightColor2, highlightColor3 } from '../../constants/styles';
 
 const styles = {
   commentsTimelineContainer: {
@@ -47,14 +47,47 @@ const styles = {
   },
 };
 
-function CommentsTimeline({ activeTrack, comments, currentTrackTime }) {
+let focusedComment;
+let lastTrackTime;
+
+function assignFocusedComment(commentsByTimestamp, currentTrackTime) {
+  let currentComments;
+  let timeIndex = Math.floor(currentTrackTime);
+  while (timeIndex >= 0) {
+    if (commentsByTimestamp[timeIndex]) {
+      currentComments = commentsByTimestamp[timeIndex];
+
+      const commentIndex = currentComments.indexOf(focusedComment);
+      if (currentComments.indexOf(focusedComment) === -1) {
+        focusedComment = currentComments[0];
+      } else if (commentIndex < currentComments.length - 1) {
+        focusedComment = currentComments[commentIndex + 1];
+      }
+
+      break;
+    }
+
+    timeIndex--;
+  }
+}
+
+function CommentsTimeline({ activeTrack, comments, commentsByTimestamp, currentTrackTime }) {
+  if (comments && comments.length && currentTrackTime !== lastTrackTime) {
+    assignFocusedComment(commentsByTimestamp, currentTrackTime);
+    lastTrackTime = currentTrackTime;
+    const element = document.querySelector(`.comment_list #track_comment_${focusedComment.id}`);
+    if (element) {
+      element.scrollIntoView();
+    }
+  }
+
   return (
     <div>
       {activeTrack.tag_list && <div style={styles.tagList}>Tags: {activeTrack.tag_list}</div>}
-      <div style={styles.commentsTimelineContainer}>
+      <div className={'comment_list'} style={styles.commentsTimelineContainer}>
         {comments && comments.length ? (
           comments.map(comment => (
-            <div key={comment.id} style={styles.commentContainer}>
+            <div id={`track_comment_${comment.id}`} key={comment.id} style={styles.commentContainer}>
               <div style={styles.avatarContainer}>
                 <a data-tip data-for={comment.user.username}>
                   <img style={styles.avatar} src={comment.user.avatar_url} />
@@ -79,11 +112,13 @@ function CommentsTimeline({ activeTrack, comments, currentTrackTime }) {
 CommentsTimeline.propTypes = {
   activeTrack: React.PropTypes.object,
   comments: React.PropTypes.array,
+  commentsByTimestamp: React.PropTypes.object,
   currentTrackTime: React.PropTypes.number,
 };
 
 export default connect(state => ({
   activeTrack: state.track.activeTrack,
   comments: state.nowPlaying.comments,
+  commentsByTimestamp: state.nowPlaying.commentsByTimestamp,
   currentTrackTime: state.track.currentTrackTime,
 }))(CommentsTimeline);
