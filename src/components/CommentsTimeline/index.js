@@ -42,7 +42,6 @@ const styles = {
     float: 'left',
     color: highlightColor3,
     fontSize: 12,
-    // marginBottom: 5,
   },
   loader: {
     marginTop: 45,
@@ -52,7 +51,6 @@ const styles = {
     display: 'inlineBlock',
     float: 'right',
     marginRight: 5,
-    // marginBottom: 5,
   },
 };
 
@@ -88,7 +86,7 @@ function CommentsTimeline({
   autoScrollComments,
   onToggle,
 }) {
-  if (comments && comments.length && currentTrackTime !== lastTrackTime) {
+  if (comments && comments.length && autoScrollComments) {
     assignFocusedComment(commentsByTimestamp, currentTrackTime);
     lastTrackTime = currentTrackTime;
     const element = document.querySelector(`.comment_list #track_comment_${focusedComment.id}`);
