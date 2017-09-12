@@ -21,6 +21,13 @@ export function setComments(comments) {
   };
 }
 
+export function toggleAutoScrollComments(autoScrollComments) {
+  return {
+    type: actionTypes.TOGGLE_AUTO_SCROLL_COMMENTS,
+    autoScrollComments,
+  };
+}
+
 export function fetchComments() {
   return (dispatch, getState) => {
     const state = getState();

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import CircularProgress from 'material-ui/CircularProgress';
+import Toggle from 'material-ui/Toggle';
 import * as actions from '../../actions';
 import { highlightColor2, highlightColor3 } from '../../constants/styles';
 
@@ -38,12 +39,20 @@ const styles = {
   tagList: {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    textAlign: 'left',
+    float: 'left',
     color: highlightColor3,
     fontSize: 12,
+    // marginBottom: 5,
   },
   loader: {
     marginTop: 45,
+  },
+  autoScrollSwitch: {
+    width: 125,
+    display: 'inlineBlock',
+    float: 'right',
+    marginRight: 5,
+    // marginBottom: 5,
   },
 };
 
@@ -71,7 +80,14 @@ function assignFocusedComment(commentsByTimestamp, currentTrackTime) {
   }
 }
 
-function CommentsTimeline({ activeTrack, comments, commentsByTimestamp, currentTrackTime }) {
+function CommentsTimeline({
+  activeTrack,
+  comments,
+  commentsByTimestamp,
+  currentTrackTime,
+  autoScrollComments,
+  onToggle,
+}) {
   if (comments && comments.length && currentTrackTime !== lastTrackTime) {
     assignFocusedComment(commentsByTimestamp, currentTrackTime);
     lastTrackTime = currentTrackTime;
@@ -83,7 +99,16 @@ function CommentsTimeline({ activeTrack, comments, commentsByTimestamp, currentT
 
   return (
     <div>
-      {activeTrack.tag_list && <div style={styles.tagList}>Tags: {activeTrack.tag_list}</div>}
+      <div>
+        {activeTrack.tag_list && <span style={styles.tagList}>Tags: {activeTrack.tag_list}</span>}
+        <Toggle
+          label="Auto Scroll"
+          onToggle={onToggle}
+          toggled={autoScrollComments}
+          style={styles.autoScrollSwitch}
+          labelStyle={{ color: highlightColor3 }}
+        />
+      </div>
       <div className={'comment_list'} style={styles.commentsTimelineContainer}>
         {comments && comments.length ? (
           comments.map(comment => (
@@ -114,11 +139,18 @@ CommentsTimeline.propTypes = {
   comments: React.PropTypes.array,
   commentsByTimestamp: React.PropTypes.object,
   currentTrackTime: React.PropTypes.number,
+  autoScrollComments: React.PropTypes.bool,
 };
 
-export default connect(state => ({
-  activeTrack: state.track.activeTrack,
-  comments: state.nowPlaying.comments,
-  commentsByTimestamp: state.nowPlaying.commentsByTimestamp,
-  currentTrackTime: state.track.currentTrackTime,
-}))(CommentsTimeline);
+export default connect(
+  state => ({
+    activeTrack: state.track.activeTrack,
+    comments: state.nowPlaying.comments,
+    commentsByTimestamp: state.nowPlaying.commentsByTimestamp,
+    currentTrackTime: state.track.currentTrackTime,
+    autoScrollComments: state.nowPlaying.autoScrollComments,
+  }),
+  dispatch => ({
+    onToggle: (event, value) => dispatch(actions.toggleAutoScrollComments(value)),
+  }),
+)(CommentsTimeline);

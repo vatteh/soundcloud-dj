@@ -3,6 +3,7 @@ import * as actionTypes from '../constants/actionTypes';
 const initialState = {
   nowPlayingExpanded: false,
   comments: null,
+  autoScrollComments: true,
 };
 
 export default function (prevState = initialState, action) {
@@ -31,6 +32,10 @@ export default function (prevState = initialState, action) {
     }
     case actionTypes.RESET_COMMENTS: {
       newState.comments = null;
+      return newState;
+    }
+    case actionTypes.TOGGLE_AUTO_SCROLL_COMMENTS: {
+      newState.autoScrollComments = action.autoScrollComments;
       return newState;
     }
     default:
