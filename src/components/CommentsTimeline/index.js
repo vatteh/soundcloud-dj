@@ -111,7 +111,14 @@ function CommentsTimeline({
       <div className={'comment_list'} style={styles.commentsTimelineContainer}>
         {comments && comments.length ? (
           comments.map(comment => (
-            <div id={`track_comment_${comment.id}`} key={comment.id} style={styles.commentContainer}>
+            <div
+              id={`track_comment_${comment.id}`}
+              key={comment.id}
+              style={{
+                ...styles.commentContainer,
+                color: !autoScrollComments || comment.id === focusedComment.id ? highlightColor2 : highlightColor3,
+              }}
+            >
               <div style={styles.avatarContainer}>
                 <a data-tip data-for={comment.user.username}>
                   <img style={styles.avatar} src={comment.user.avatar_url} />
