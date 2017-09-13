@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import CircularProgress from 'material-ui/CircularProgress';
 import Toggle from 'material-ui/Toggle';
+import scrollIntoView from 'scroll-into-view';
 import * as actions from '../../actions';
 import { highlightColor2, highlightColor3 } from '../../constants/styles';
 
@@ -91,7 +92,7 @@ function CommentsTimeline({
     lastTrackTime = currentTrackTime;
     const element = document.querySelector(`.comment_list #track_comment_${focusedComment.id}`);
     if (element) {
-      element.scrollIntoView();
+      scrollIntoView(element, { time: 200 });
     }
   }
 
