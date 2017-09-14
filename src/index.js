@@ -10,6 +10,8 @@ import configureStore from './stores/configureStore';
 import App from './components/App';
 import TrackList from './components/TrackList';
 
+require('./styles.scss');
+
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();

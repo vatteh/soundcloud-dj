@@ -22,7 +22,7 @@ body {
 a {
   text-decoration: none;
   color: black;
-  transition: color .2s;
+  transition: color 0.2s;
 }
 
 a:hover {
@@ -40,7 +40,7 @@ a:hover {
 .playTrackIcon {
   opacity: 0;
   margin-left: 0;
-  transition: opacity .3s, transform .03s, margin-left .3s, ease-in-out;
+  transition: opacity 0.3s, transform 0.03s, margin-left 0.3s, ease-in-out;
 }
 
 .pauseTrackIcon {
@@ -63,15 +63,15 @@ a:hover {
 }
 
 .player {
-  transition: bottom .2s, height .1s;
-  -webkit-transition: bottom .2s, height .1s;
+  transition: bottom 0.2s, height 0.1s;
+  -webkit-transition: bottom 0.2s, height 0.1s;
   transition-timing-function: ease-in;
   -webkit-transition-timing-function: ease-in;
 }
 
 .nowPlayingContainer {
-  transition: height .1s;
-  -webkit-transition: height .1s;
+  transition: height 0.1s;
+  -webkit-transition: height 0.1s;
   transition-timing-function: ease-in;
   -webkit-transition-timing-function: ease-in;
 }

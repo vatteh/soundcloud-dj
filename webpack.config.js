@@ -2,21 +2,24 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: [
-    'webpack-dev-server/client?http://localhost:1337',
-    'webpack/hot/only-dev-server',
-    './src/index.js',
-  ],
+  entry: ['webpack-dev-server/client?http://localhost:1337', 'webpack/hot/only-dev-server', './src/index.js'],
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: 'react-hot-loader!babel-loader',
-    }, {
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: ['babel-loader', 'eslint-loader'],
-    }],
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'react-hot-loader!babel-loader',
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: ['babel-loader', 'eslint-loader'],
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+    ],
   },
   resolve: {
     extensions: ['*', '.js', '.jsx'],
