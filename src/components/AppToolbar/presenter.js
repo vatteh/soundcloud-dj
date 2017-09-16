@@ -5,9 +5,6 @@ import AppBar from 'material-ui/AppBar';
 import { highlightColor1 } from '../../constants/styles';
 
 const styles = {
-  searchIcon: {
-    marginRight: 10,
-  },
   underlineStyle: {
     borderColor: 'black',
   },
@@ -15,7 +12,6 @@ const styles = {
     borderColor: 'rgb(224, 224, 224)',
   },
   searchedFor: {
-    marginRight: 10,
     color: highlightColor1,
   },
 };
@@ -41,8 +37,10 @@ export default class AppToolbar extends Component {
         showMenuIconButton={false}
         iconElementRight={
           <span>
-            {searchText && <span style={styles.searchedFor}>{`Searched for: ${searchText}`}</span>}
-            <i className="fa fa-search fa-lg" style={styles.searchIcon} aria-hidden="true" />
+            {searchText && (
+              <span className="searchedFor" style={styles.searchedFor}>{`Searched for: ${searchText}`}</span>
+            )}
+            <i className="fa fa-search fa-lg searchIcon" aria-hidden="true" />
             <TextField
               id="search-text-field"
               onKeyPress={this.onKeyPress.bind(this)}

@@ -8,41 +8,11 @@ import * as actions from '../../actions';
 import { highlightColor2, highlightColor3 } from '../../constants/styles';
 
 const styles = {
-  commentsTimelineContainer: {
-    height: 150,
-    width: '100%',
-    overflow: 'scroll',
-  },
   commentContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    textAlign: 'left',
-    alignItems: 'center',
-    marginTop: 10,
     color: highlightColor2,
   },
-  avatarContainer: {
-    display: 'flex',
-    flexDirection: 'col',
-    height: 40,
-    marginLeft: 5,
-    marginRight: 10,
-  },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 30,
-    display: 'block',
-  },
-  commentBody: {
-    fontSize: 14,
-  },
   tagList: {
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    float: 'left',
     color: highlightColor3,
-    fontSize: 12,
   },
   loader: {
     marginTop: 45,
@@ -90,7 +60,7 @@ function CommentsTimeline({
   if (comments && comments.length && autoScrollComments) {
     assignFocusedComment(commentsByTimestamp, currentTrackTime);
     lastTrackTime = currentTrackTime;
-    const element = document.querySelector(`.comment_list #track_comment_${focusedComment.id}`);
+    const element = document.querySelector(`.commentList #trackComment_${focusedComment.id}`);
     if (element) {
       scrollIntoView(element, { time: 200 });
     }
@@ -99,7 +69,11 @@ function CommentsTimeline({
   return (
     <div>
       <div>
-        {activeTrack.tag_list && <span style={styles.tagList}>Tags: {activeTrack.tag_list}</span>}
+        {activeTrack.tag_list && (
+          <span className="tagList" style={styles.tagList}>
+            Tags: {activeTrack.tag_list}
+          </span>
+        )}
         <Toggle
           label="Auto Scroll"
           onToggle={onToggle}
@@ -108,26 +82,26 @@ function CommentsTimeline({
           labelStyle={{ color: highlightColor3 }}
         />
       </div>
-      <div className={'comment_list'} style={styles.commentsTimelineContainer}>
+      <div className="commentList">
         {comments && comments.length ? (
           comments.map(comment => (
             <div
-              id={`track_comment_${comment.id}`}
+              id={`trackComment_${comment.id}`}
               key={comment.id}
+              className="commentList__commentContainer"
               style={{
-                ...styles.commentContainer,
                 color: !autoScrollComments || comment.id === focusedComment.id ? highlightColor2 : highlightColor3,
               }}
             >
-              <div style={styles.avatarContainer}>
+              <div className="avatarContainer">
                 <a data-tip data-for={comment.user.username}>
-                  <img style={styles.avatar} src={comment.user.avatar_url} />
+                  <img className="avatarContainer__image" src={comment.user.avatar_url} />
                 </a>
                 <ReactTooltip place="top" type="dark" effect="float" id={comment.user.username}>
                   <div>{comment.user.username}</div>
                 </ReactTooltip>
               </div>
-              <span style={styles.commentBody}>
+              <span className="commentBody">
                 {comment.body} - {comment.timestamp_formatted}
               </span>
             </div>

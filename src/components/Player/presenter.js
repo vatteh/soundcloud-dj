@@ -12,25 +12,8 @@ import CLIENT_ID from '../../constants/auth';
 import { basePlayerColor } from '../../constants/styles';
 
 const styles = {
-  playerContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    textAlign: 'center',
-    background: 'rgba(0, 0, 0, 0)',
-    position: 'fixed',
-    right: 0,
-    width: '100%',
-    borderTop: '1px solid rgba(0, 0, 0, 0)',
-    zIndex: 1,
-  },
+  playerContainer: {},
   playControlsContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    height: 70,
-    width: '100%',
     background: basePlayerColor,
   },
 };
@@ -98,7 +81,7 @@ export default class Player extends Component {
       <div>
         <div className="player" style={styles.playerContainer}>
           <NowPlaying />
-          <div style={styles.playControlsContainer}>
+          <div className="player__controls" style={styles.playControlsContainer}>
             <ControlButtons
               activeTrack={activeTrack}
               isPlaying={isPlaying}

@@ -6,19 +6,6 @@ import { cyan500 } from 'material-ui/styles/colors';
 import { highlightColor3 } from '../../constants/styles';
 
 const styles = {
-  container: {
-    width: 350,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-  },
-  volumeContainer: {
-    width: 145,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   volumeSlider: {
     width: 100,
     margin: 6,
@@ -54,10 +41,10 @@ export default class Volume extends Component {
     };
 
     return (
-      <div style={styles.container}>
+      <div className="rightControls">
         <i onClick={onRepeatToggle} className="fa fa-repeat fa-2x" style={onRepeatIconStyle} aria-hidden="true" />
         <i onClick={onRandomToggle} className="fa fa-random fa-2x" style={onRandomIconStyle} aria-hidden="true" />
-        <div style={styles.volumeContainer}>
+        <div className="rightControls__volume">
           <span style={styles.volumeSliderIcon}>
             {volumeValue >= 0.7 && <i className="fa fa-volume-up fa-2x" aria-hidden="true" />}
             {volumeValue < 0.7 && volumeValue > 0 && <i className="fa fa-volume-down fa-2x" aria-hidden="true" />}

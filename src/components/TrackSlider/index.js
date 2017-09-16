@@ -4,13 +4,6 @@ import { formatTime } from '../../utils';
 import { highlightColor3 } from '../../constants/styles';
 
 const styles = {
-  sliderContainer: {
-    width: 850,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
   slider: {
     width: 730,
     marginTop: 10,
@@ -40,10 +33,8 @@ function TrackSlider({ activeTrack, currentTrackTime, onSliderDrag }) {
   }
 
   return (
-    <div style={styles.sliderContainer}>
-      <span style={styles.trackTimeDisplay}>
-        {currentTrackTimeDisplay}
-      </span>
+    <div className="slider">
+      <span style={styles.trackTimeDisplay}>{currentTrackTimeDisplay}</span>
       <Slider
         min={0}
         max={totalDurationSeconds}
@@ -53,9 +44,7 @@ function TrackSlider({ activeTrack, currentTrackTime, onSliderDrag }) {
         disableFocusRipple={true}
         sliderStyle={styles.slider}
       />
-      <span style={styles.trackTimeDisplay}>
-        -{remainingTrackTimeDisplay}
-      </span>
+      <span style={styles.trackTimeDisplay}>-{remainingTrackTimeDisplay}</span>
     </div>
   );
 }

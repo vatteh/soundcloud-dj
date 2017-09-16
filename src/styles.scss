@@ -2,35 +2,47 @@ body {
   font-family: Roboto, sans-serif;
 }
 
+.searchedFor {
+  margin-right: 10px;
+}
+
+.searchIcon {
+  margin-right: 10px;
+}
+
 .tableRow {
   height: 60px;
+
+  &:hover .playTrackIcon {
+    opacity: 1;
+    margin-left: 5px;
+  }
+
+  &:hover .indexTrackIcon {
+    display: none;
+  }
+
+  .inner-column {
+    font-size: 1.2em;
+  }
 }
 
 .trackIcons {
   position: relative;
-}
 
-.trackIcons:hover .playingTrackIcon {
-  display: none;
-}
-
-.tableRow:hover .playTrackIcon {
-  opacity: 1;
-  margin-left: 5px;
+  &:hover .playingTrackIcon {
+    display: none;
+  }
 }
 
 a {
   text-decoration: none;
   color: black;
   transition: color 0.2s;
-}
 
-a:hover {
-  color: #adadad;
-}
-
-.tableRow:hover .indexTrackIcon {
-  display: none;
+  &:hover {
+    color: #adadad;
+  }
 }
 
 .playingTrackIcon {
@@ -63,21 +75,156 @@ a:hover {
 }
 
 .player {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  background: rgba(0, 0, 0, 0);
+  position: fixed;
+  right: 0;
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0);
+  z-index: 1;
   transition: bottom 0.2s, height 0.1s;
   -webkit-transition: bottom 0.2s, height 0.1s;
   transition-timing-function: ease-in;
   -webkit-transition-timing-function: ease-in;
+
+  &__controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 70px;
+    width: 100%;
+  }
 }
 
-.nowPlayingContainer {
+.nowPlaying {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 70;
+  width: 100%;
   transition: height 0.1s;
   -webkit-transition: height 0.1s;
   transition-timing-function: ease-in;
   -webkit-transition-timing-function: ease-in;
+
+  &__trackTitleComments {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+
+    &__playerTrackTitle {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 1.2em;
+      }
+
+      .date {
+        margin-right: 5;
+      }
+    }
+  }
+}
+
+.trackImage {
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+
+  &__image {
+    height: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+}
+
+.rightControls {
+  width: 350px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+
+  &__volume {
+    width: 145px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.slider {
+  width: 850px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.controlButtons {
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.tagList {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  float: left;
+  font-size: 12px;
+}
+
+.commentList {
+  height: 150px;
+  width: 100%;
+  overflow: scroll;
+
+  &__commentContainer {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    align-items: center;
+    margin-top: 10px;
+
+    .avatarContainer {
+      display: flex;
+      flex-direction: column;
+      height: 40px;
+      margin-left: 5px;
+      margin-right: 10px;
+
+      &__image {
+        width: 40px;
+        height: 40px;
+        border-radius: 30px;
+        display: block;
+      }
+    }
+
+    .commentBody {
+      font-size: 14px;
+    }
+  }
 }
 
 .trackImageExpandIcon {
   opacity: 0;
+  position: absolute;
+  top: 6px;
+  right: 8px;
   transition: opacity 0.2s ease-in;
 }
 

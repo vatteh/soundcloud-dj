@@ -16,7 +16,6 @@ const likesColumnStyles = { width: 60, cursor: 'pointer' };
 const commentsColumnStyles = { width: 60, cursor: 'pointer' };
 const durationColumnStyles = { width: 60, cursor: 'pointer' };
 const loaderColumnStyles = { overflow: 'visible' };
-const innerColumnStyle = { fontSize: `${1.2}em` };
 const columnTitleStyles = { marginRight: 5 };
 const loaderStyles = {
   display: 'flex',
@@ -118,21 +117,21 @@ class TrackList extends Component {
                   />
                 </TableRowColumn>
                 <TableRowColumn>
-                  <span style={innerColumnStyle}>
+                  <span className="inner-column">
                     <a href={track.permalink_url}>{track.title}</a>
                   </span>
                 </TableRowColumn>
                 <TableRowColumn style={playsColumnStyles}>
-                  <span style={innerColumnStyle}>{track.playback_count.toLocaleString()}</span>
+                  <span className="inner-column">{track.playback_count.toLocaleString()}</span>
                 </TableRowColumn>
                 <TableRowColumn style={likesColumnStyles}>
-                  <span style={innerColumnStyle}>{track.likes_count.toLocaleString()}</span>
+                  <span className="inner-column">{track.likes_count.toLocaleString()}</span>
                 </TableRowColumn>
                 <TableRowColumn style={commentsColumnStyles}>
-                  <span style={innerColumnStyle}>{track.comment_count.toLocaleString()}</span>
+                  <span className="inner-column">{track.comment_count.toLocaleString()}</span>
                 </TableRowColumn>
                 <TableRowColumn style={durationColumnStyles}>
-                  <span style={innerColumnStyle}>{track.duration_formatted}</span>
+                  <span className="inner-column">{track.duration_formatted}</span>
                 </TableRowColumn>
               </TableRow>
             ))}
