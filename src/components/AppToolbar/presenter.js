@@ -2,19 +2,8 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import AppBar from 'material-ui/AppBar';
-import { highlightColor1 } from '../../constants/styles';
 
-const styles = {
-  underlineStyle: {
-    borderColor: 'black',
-  },
-  underlineFocusStyle: {
-    borderColor: 'rgb(224, 224, 224)',
-  },
-  searchedFor: {
-    color: highlightColor1,
-  },
-};
+const focusHighlightColor = 'rgb(224, 224, 224)';
 
 export default class AppToolbar extends Component {
   onKeyPress(e) {
@@ -37,15 +26,13 @@ export default class AppToolbar extends Component {
         showMenuIconButton={false}
         iconElementRight={
           <span>
-            {searchText && (
-              <span className="searchedFor" style={styles.searchedFor}>{`Searched for: ${searchText}`}</span>
-            )}
+            {searchText && <span className="searchedFor">{`Searched for: ${searchText}`}</span>}
             <i className="fa fa-search fa-lg searchIcon" aria-hidden="true" />
             <TextField
               id="search-text-field"
               onKeyPress={this.onKeyPress.bind(this)}
-              underlineStyle={styles.underlineStyle}
-              underlineFocusStyle={styles.underlineFocusStyle}
+              underlineStyle={{ borderColor: 'black' }}
+              underlineFocusStyle={{ borderColor: focusHighlightColor }}
             />
           </span>
         }

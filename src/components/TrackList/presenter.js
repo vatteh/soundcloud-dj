@@ -3,20 +3,13 @@ import ReactDOM from 'react-dom';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import CircularProgress from 'material-ui/CircularProgress';
 import FontIcon from 'material-ui/FontIcon';
+
 import PlayIcons from '../PlayIcons';
 import Player from '../Player';
 import AppToolbar from '../AppToolbar';
 import SortIcon from '../SortIcon';
 import CLIENT_ID from '../../constants/auth';
 
-const playIconColumnStyles = { width: 50, height: 60 };
-const titleColumnStyles = { cursor: 'pointer' };
-const playsColumnStyles = { width: 80, cursor: 'pointer' };
-const likesColumnStyles = { width: 60, cursor: 'pointer' };
-const commentsColumnStyles = { width: 60, cursor: 'pointer' };
-const durationColumnStyles = { width: 60, cursor: 'pointer' };
-const loaderColumnStyles = { overflow: 'visible' };
-const columnTitleStyles = { marginRight: 5 };
 const loaderStyles = {
   display: 'flex',
   justifyContent: 'center',
@@ -78,36 +71,36 @@ class TrackList extends Component {
     return (
       <div>
         <AppToolbar onFetchTracks={onFetchTracks} />
-        <Table fixedHeader={true} height={`${window.innerHeight - 150}px`}>
-          <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+        <Table className="table" fixedHeader={true} height={`${window.innerHeight - 150}px`}>
+          <TableHeader className="tableHeader" displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow onClick={this.sortTableBy.bind(this)}>
-              <TableHeaderColumn style={playIconColumnStyles} />
-              <TableHeaderColumn data-sort="title" style={titleColumnStyles}>
-                <span style={columnTitleStyles}>Title</span>
+              <TableHeaderColumn className="table__playIconColumnTitle pointer" />
+              <TableHeaderColumn className="pointer" data-sort="title">
+                <span>Title</span>
                 <SortIcon column={'title'} sortBy={sortBy} />
               </TableHeaderColumn>
-              <TableHeaderColumn data-sort="playback_count" style={playsColumnStyles}>
-                <span style={columnTitleStyles}>Plays</span>
+              <TableHeaderColumn className="table__playsColumnTitle pointer" data-sort="playback_count">
+                <span>Plays</span>
                 <SortIcon column={'playback_count'} sortBy={sortBy} />
               </TableHeaderColumn>
-              <TableHeaderColumn data-sort="likes_count" style={likesColumnStyles}>
-                <i className="fa fa-heart fa-lg" style={columnTitleStyles} aria-hidden="true" />
+              <TableHeaderColumn className="table__likesColumnTitle pointer" data-sort="likes_count">
+                <i className="fa fa-heart fa-lg" aria-hidden="true" />
                 <SortIcon column={'likes_count'} sortBy={sortBy} />
               </TableHeaderColumn>
-              <TableHeaderColumn data-sort="comment_count" style={commentsColumnStyles}>
-                <i className="fa fa-comments fa-lg" style={columnTitleStyles} aria-hidden="true" />
+              <TableHeaderColumn className="table__commentCountColumnTitle pointer" data-sort="comment_count">
+                <i className="fa fa-comments fa-lg" aria-hidden="true" />
                 <SortIcon column={'comment_count'} sortBy={sortBy} />
               </TableHeaderColumn>
-              <TableHeaderColumn data-sort="duration" style={durationColumnStyles}>
-                <span style={columnTitleStyles}>Duration</span>
+              <TableHeaderColumn className="table__durationColumnTitle pointer" data-sort="duration">
+                <span>Duration</span>
                 <SortIcon column={'duration'} sortBy={sortBy} />
               </TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false} showRowHover={true}>
             {tracks.map((track, key) => (
-              <TableRow key={key} className="tableRow" onDoubleClick={this.rowDoubleClickHelper.bind(this, track)}>
-                <TableRowColumn style={playIconColumnStyles}>
+              <TableRow key={key} className="tableBodyRow" onDoubleClick={this.rowDoubleClickHelper.bind(this, track)}>
+                <TableRowColumn className="table__playIconColumnTitle pointer">
                   <PlayIcons
                     activeTrack={activeTrack}
                     isPlaying={this.props.isPlaying}
@@ -121,22 +114,22 @@ class TrackList extends Component {
                     <a href={track.permalink_url}>{track.title}</a>
                   </span>
                 </TableRowColumn>
-                <TableRowColumn style={playsColumnStyles}>
+                <TableRowColumn className="table__playsColumnTitle">
                   <span className="inner-column">{track.playback_count.toLocaleString()}</span>
                 </TableRowColumn>
-                <TableRowColumn style={likesColumnStyles}>
+                <TableRowColumn className="table__likesColumnTitle">
                   <span className="inner-column">{track.likes_count.toLocaleString()}</span>
                 </TableRowColumn>
-                <TableRowColumn style={commentsColumnStyles}>
+                <TableRowColumn className="table__commentCountColumnTitle">
                   <span className="inner-column">{track.comment_count.toLocaleString()}</span>
                 </TableRowColumn>
-                <TableRowColumn style={durationColumnStyles}>
+                <TableRowColumn className="table__durationColumnTitle">
                   <span className="inner-column">{track.duration_formatted}</span>
                 </TableRowColumn>
               </TableRow>
             ))}
-            <TableRow className="tableRow">
-              <TableRowColumn className="tableColumn" style={loaderColumnStyles}>
+            <TableRow className="tableBodyRow">
+              <TableRowColumn className="tableColumn">
                 {fetchingTracks && <CircularProgress size={70} thickness={7} style={loaderStyles} />}
               </TableRowColumn>
             </TableRow>

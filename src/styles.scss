@@ -1,16 +1,31 @@
+$basePlayerColor: #343a3e;
+$basePlayerColorTransparent: rgba(52, 58, 62, 0.95);
+$highlightColor1: #fff;
+$highlightColor2: #dedede;
+$highlightColor3: #8a9199;
+
+:export {
+  basePlayerColor: $basePlayerColor;
+  basePlayerColorTransparent: $basePlayerColorTransparent;
+  highlightColor1: $highlightColor1;
+  highlightColor2: $highlightColor2;
+  highlightColor3: $highlightColor3;
+}
+
 body {
   font-family: Roboto, sans-serif;
 }
 
 .searchedFor {
   margin-right: 10px;
+  color: $highlightColor1;
 }
 
 .searchIcon {
   margin-right: 10px;
 }
 
-.tableRow {
+.tableBodyRow {
   height: 60px;
 
   &:hover .playTrackIcon {
@@ -24,6 +39,10 @@ body {
 
   .inner-column {
     font-size: 1.2em;
+  }
+
+  .loaderColumn {
+    overflow: visible;
   }
 }
 
@@ -97,6 +116,7 @@ a {
     justify-content: space-between;
     height: 70px;
     width: 100%;
+    background: $basePlayerColor;
   }
 }
 
@@ -105,8 +125,9 @@ a {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 70;
+  height: 70px;
   width: 100%;
+  background-color: $basePlayerColorTransparent;
   transition: height 0.1s;
   -webkit-transition: height 0.1s;
   transition-timing-function: ease-in;
@@ -129,10 +150,12 @@ a {
         text-overflow: ellipsis;
         white-space: nowrap;
         font-size: 1.2em;
+        color: $highlightColor2;
       }
 
       .date {
-        margin-right: 5;
+        margin-right: 5px;
+        color: $highlightColor3;
       }
     }
   }
@@ -157,11 +180,23 @@ a {
   justify-content: space-evenly;
   align-items: center;
 
+  &__onRepeat {
+    color: $highlightColor3;
+  }
+
+  &__onRandom {
+    color: $highlightColor3;
+  }
+
   &__volume {
     width: 145px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    &__icon {
+      color: $highlightColor3;
+    }
   }
 }
 
@@ -171,13 +206,18 @@ a {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+
+  &__timeDisplay {
+    color: $highlightColor3;
+  }
 }
 
 .controlButtons {
-  width: 200px;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  width: 200px;
+  color: $highlightColor1;
 }
 
 .tagList {
@@ -185,6 +225,41 @@ a {
   text-overflow: ellipsis;
   float: left;
   font-size: 12px;
+  color: $highlightColor3;
+}
+
+.table {
+  &__playIconColumnTitle {
+    width: 50px;
+    height: 60px;
+  }
+
+  &__playsColumnTitle {
+    width: 80px;
+  }
+
+  &__likesColumnTitle {
+    width: 60px;
+  }
+
+  &__commentCountColumnTitle {
+    width: 60px;
+  }
+
+  &__durationColumnTitle {
+    width: 60px;
+  }
+
+  .tableHeader {
+    span,
+    i {
+      margin-right: 5px;
+    }
+  }
+
+  .pointer {
+    cursor: pointer;
+  }
 }
 
 .commentList {
@@ -192,12 +267,17 @@ a {
   width: 100%;
   overflow: scroll;
 
+  .highlightComment {
+    color: $highlightColor2;
+  }
+
   &__commentContainer {
     display: flex;
     flex-direction: row;
     text-align: left;
     align-items: center;
     margin-top: 10px;
+    color: $highlightColor3;
 
     .avatarContainer {
       display: flex;

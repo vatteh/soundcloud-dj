@@ -19,7 +19,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onPlayPauseIconClick: bindActionCreators(actions.playPauseTrack, dispatch),
     onPrevNextTrackIconClick: bindActionCreators(actions.prevNextTrack, dispatch),
     onSliderDrag: bindActionCreators(actions.updateTrackPlayhead, dispatch),
     onSliderUpdate: bindActionCreators(actions.updateSlider, dispatch),

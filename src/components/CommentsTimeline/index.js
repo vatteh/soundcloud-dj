@@ -4,16 +4,11 @@ import ReactTooltip from 'react-tooltip';
 import CircularProgress from 'material-ui/CircularProgress';
 import Toggle from 'material-ui/Toggle';
 import scrollIntoView from 'scroll-into-view';
+
 import * as actions from '../../actions';
-import { highlightColor2, highlightColor3 } from '../../constants/styles';
+import { highlightColor3 } from '../../styles.scss';
 
 const styles = {
-  commentContainer: {
-    color: highlightColor2,
-  },
-  tagList: {
-    color: highlightColor3,
-  },
   loader: {
     marginTop: 45,
   },
@@ -69,11 +64,7 @@ function CommentsTimeline({
   return (
     <div>
       <div>
-        {activeTrack.tag_list && (
-          <span className="tagList" style={styles.tagList}>
-            Tags: {activeTrack.tag_list}
-          </span>
-        )}
+        {activeTrack.tag_list && <span className="tagList">Tags: {activeTrack.tag_list}</span>}
         <Toggle
           label="Auto Scroll"
           onToggle={onToggle}
@@ -88,10 +79,8 @@ function CommentsTimeline({
             <div
               id={`trackComment_${comment.id}`}
               key={comment.id}
-              className="commentList__commentContainer"
-              style={{
-                color: !autoScrollComments || comment.id === focusedComment.id ? highlightColor2 : highlightColor3,
-              }}
+              className={`commentList__commentContainer ${(!autoScrollComments || comment.id === focusedComment.id) &&
+                'highlightComment'}`}
             >
               <div className="avatarContainer">
                 <a data-tip data-for={comment.user.username}>

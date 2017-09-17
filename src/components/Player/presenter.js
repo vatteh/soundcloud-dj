@@ -4,19 +4,12 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCol
 import FontIcon from 'material-ui/FontIcon';
 import { GridList } from 'material-ui/GridList';
 import Slider from 'material-ui/Slider';
+
 import TrackSlider from '../TrackSlider';
 import ControlButtons from '../ControlButtons';
 import NowPlaying from '../NowPlaying';
 import Volume from '../Volume';
 import CLIENT_ID from '../../constants/auth';
-import { basePlayerColor } from '../../constants/styles';
-
-const styles = {
-  playerContainer: {},
-  playControlsContainer: {
-    background: basePlayerColor,
-  },
-};
 
 export default class Player extends Component {
   componentDidUpdate() {
@@ -57,15 +50,7 @@ export default class Player extends Component {
   }
 
   render() {
-    const {
-      activeTrack,
-      isPlaying,
-      currentTrackTime,
-      nowPlayingExpanded,
-      onSliderDrag,
-      onPlayPauseIconClick,
-      onPrevNextTrackIconClick,
-    } = this.props;
+    const { activeTrack, isPlaying, currentTrackTime, nowPlayingExpanded, onSliderDrag } = this.props;
 
     if (isPlaying && !this.sliderUpdateTimeoutID) {
       this.awaitSliderUpdate();
@@ -74,20 +59,12 @@ export default class Player extends Component {
       this.sliderUpdateTimeoutID = undefined;
     }
 
-    styles.playerContainer.bottom = activeTrack ? 0 : -140;
-    styles.playerContainer.height = nowPlayingExpanded ? 280 : 140;
-
     return (
       <div>
-        <div className="player" style={styles.playerContainer}>
+        <div className="player" style={{ bottom: activeTrack ? 0 : -140, height: nowPlayingExpanded ? 280 : 140 }}>
           <NowPlaying />
-          <div className="player__controls" style={styles.playControlsContainer}>
-            <ControlButtons
-              activeTrack={activeTrack}
-              isPlaying={isPlaying}
-              onPrevNextTrackIconClick={onPrevNextTrackIconClick}
-              onPlayPauseIconClick={onPlayPauseIconClick}
-            />
+          <div className="player__controls">
+            <ControlButtons />
             <TrackSlider activeTrack={activeTrack} currentTrackTime={currentTrackTime} onSliderDrag={onSliderDrag} />
             <Volume audioElement={this.audioElement} />
           </div>

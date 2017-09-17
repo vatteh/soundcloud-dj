@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import FontIcon from 'material-ui/FontIcon';
 import Slider from 'material-ui/Slider';
 import { cyan500 } from 'material-ui/styles/colors';
-import { highlightColor3 } from '../../constants/styles';
 
 const styles = {
   volumeSlider: {
@@ -11,8 +10,8 @@ const styles = {
     margin: 6,
     float: 'right',
   },
-  volumeSliderIcon: {
-    color: highlightColor3,
+  highlightIconStyle: {
+    color: cyan500,
   },
 };
 
@@ -33,19 +32,23 @@ export default class Volume extends Component {
 
   render() {
     const { volumeValue, onRepeat, onRandom, onRepeatToggle, onRandomToggle } = this.props;
-    const onRepeatIconStyle = {
-      color: onRepeat ? cyan500 : highlightColor3,
-    };
-    const onRandomIconStyle = {
-      color: onRandom ? cyan500 : highlightColor3,
-    };
 
     return (
       <div className="rightControls">
-        <i onClick={onRepeatToggle} className="fa fa-repeat fa-2x" style={onRepeatIconStyle} aria-hidden="true" />
-        <i onClick={onRandomToggle} className="fa fa-random fa-2x" style={onRandomIconStyle} aria-hidden="true" />
+        <i
+          onClick={onRepeatToggle}
+          className="fa fa-repeat fa-2x rightControls__onRepeat"
+          style={onRepeat ? styles.highlightIconStyle : {}}
+          aria-hidden="true"
+        />
+        <i
+          onClick={onRandomToggle}
+          className="fa fa-random fa-2x rightControls__onRandom"
+          style={onRandom ? styles.highlightIconStyle : {}}
+          aria-hidden="true"
+        />
         <div className="rightControls__volume">
-          <span style={styles.volumeSliderIcon}>
+          <span className="rightControls__volume__icon">
             {volumeValue >= 0.7 && <i className="fa fa-volume-up fa-2x" aria-hidden="true" />}
             {volumeValue < 0.7 && volumeValue > 0 && <i className="fa fa-volume-down fa-2x" aria-hidden="true" />}
             {volumeValue === 0 && <i className="fa fa-volume-off fa-2x" aria-hidden="true" />}

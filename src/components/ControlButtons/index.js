@@ -1,15 +1,11 @@
 import React from 'react';
-import { highlightColor1 } from '../../constants/styles';
+import { connect } from 'react-redux';
 
-const styles = {
-  controlButtons: {
-    color: highlightColor1,
-  },
-};
+import * as actions from '../../actions';
 
 function ControlButtons({ activeTrack, isPlaying, onPrevNextTrackIconClick, onPlayPauseIconClick }) {
   return (
-    <div className="controlButtons" style={styles.controlButtons}>
+    <div className="controlButtons">
       <i
         onClick={onPrevNextTrackIconClick.bind(this, activeTrack, -1)}
         className="fa fa-step-backward fa-2x"
@@ -38,4 +34,13 @@ ControlButtons.propTypes = {
   onPlayPauseIconClick: React.PropTypes.func,
 };
 
-export default ControlButtons;
+export default connect(
+  state => ({
+    activeTrack: state.track.activeTrack,
+    isPlaying: state.track.isPlaying,
+  }),
+  dispatch => ({
+    onPrevNextTrackIconClick: (currentTrack, increment) => dispatch(actions.prevNextTrack(currentTrack, increment)),
+    onPlayPauseIconClick: selectedTrack => dispatch(actions.playPauseTrack(selectedTrack)),
+  }),
+)(ControlButtons);

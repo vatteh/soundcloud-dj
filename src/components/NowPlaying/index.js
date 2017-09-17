@@ -1,21 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Marquee from 'react-marquee';
+
 import * as actions from '../../actions';
 import CommentsTimeline from '../CommentsTimeline';
-import { basePlayerColorTransparent, highlightColor1, highlightColor2, highlightColor3 } from '../../constants/styles';
-
-const styles = {
-  nowPlayingContainer: {
-    background: basePlayerColorTransparent,
-  },
-  playerTrackTitle: {
-    color: highlightColor2,
-  },
-  createdAt: {
-    color: highlightColor3,
-  },
-};
 
 let trackImageExpandIcon;
 let fetchingComments = false;
@@ -55,7 +43,6 @@ TrackImage.propTypes = {
 };
 
 function NowPlaying({ activeTrack, nowPlayingExpanded, comments, onFetchComments, onExpandClick }) {
-  styles.nowPlayingContainer.height = nowPlayingExpanded ? 210 : 70;
   if (nowPlayingExpanded && !comments && !fetchingComments) {
     fetchingComments = true;
     onFetchComments(activeTrack.id);
@@ -65,16 +52,14 @@ function NowPlaying({ activeTrack, nowPlayingExpanded, comments, onFetchComments
 
   if (activeTrack) {
     return (
-      <div className="nowPlaying" style={styles.nowPlayingContainer}>
+      <div className="nowPlaying" style={{ height: nowPlayingExpanded ? 210 : 70 }}>
         <TrackImage activeTrack={activeTrack} nowPlayingExpanded={nowPlayingExpanded} onExpandClick={onExpandClick} />
         <div className="nowPlaying__trackTitleComments">
           <div className="nowPlaying__trackTitleComments__playerTrackTitle">
-            <a href={activeTrack.permalink_url} className="title" style={styles.playerTrackTitle}>
+            <a href={activeTrack.permalink_url} className="title">
               <Marquee text={activeTrack.title} leading={1000} trailing={1000} loop={true} />
             </a>
-            <span className="date" style={styles.createdAt}>
-              {activeTrack.created_at_formatted}
-            </span>
+            <span className="date">{activeTrack.created_at_formatted}</span>
           </div>
           {nowPlayingExpanded && <CommentsTimeline />}
         </div>
