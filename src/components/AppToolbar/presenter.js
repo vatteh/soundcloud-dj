@@ -3,7 +3,7 @@ import TextField from 'material-ui/TextField';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import AppBar from 'material-ui/AppBar';
 
-const focusHighlightColor = 'rgb(224, 224, 224)';
+import { textFieldHighlightColor } from '../../styles.scss';
 
 export default class AppToolbar extends Component {
   onKeyPress(e) {
@@ -32,7 +32,7 @@ export default class AppToolbar extends Component {
               id="search-text-field"
               onKeyPress={this.onKeyPress.bind(this)}
               underlineStyle={{ borderColor: 'black' }}
-              underlineFocusStyle={{ borderColor: focusHighlightColor }}
+              underlineFocusStyle={{ borderColor: textFieldHighlightColor }}
             />
           </span>
         }

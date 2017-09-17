@@ -3,6 +3,7 @@ $basePlayerColorTransparent: rgba(52, 58, 62, 0.95);
 $highlightColor1: #fff;
 $highlightColor2: #dedede;
 $highlightColor3: #8a9199;
+$textFieldHighlightColor: rgb(224, 224, 224);
 
 :export {
   basePlayerColor: $basePlayerColor;
@@ -10,6 +11,7 @@ $highlightColor3: #8a9199;
   highlightColor1: $highlightColor1;
   highlightColor2: $highlightColor2;
   highlightColor3: $highlightColor3;
+  textFieldHighlightColor: $textFieldHighlightColor;
 }
 
 body {
