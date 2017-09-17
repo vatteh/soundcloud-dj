@@ -101,13 +101,7 @@ class TrackList extends Component {
             {tracks.map((track, key) => (
               <TableRow key={key} className="tableBodyRow" onDoubleClick={this.rowDoubleClickHelper.bind(this, track)}>
                 <TableRowColumn className="table__playIconColumnTitle pointer">
-                  <PlayIcons
-                    activeTrack={activeTrack}
-                    isPlaying={this.props.isPlaying}
-                    onClickFunction={this.props.onPlayPauseIconClick.bind(this, track)}
-                    track={track}
-                    index={key}
-                  />
+                  <PlayIcons track={track} index={key} />
                 </TableRowColumn>
                 <TableRowColumn>
                   <span className="inner-column">
@@ -135,7 +129,7 @@ class TrackList extends Component {
             </TableRow>
           </TableBody>
         </Table>
-        <Player activeTrack={activeTrack} />
+        <Player />
       </div>
     );
   }

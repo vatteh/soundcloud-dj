@@ -20,7 +20,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onPrevNextTrackIconClick: bindActionCreators(actions.prevNextTrack, dispatch),
-    onSliderDrag: bindActionCreators(actions.updateTrackPlayhead, dispatch),
     onSliderUpdate: bindActionCreators(actions.updateSlider, dispatch),
   };
 }

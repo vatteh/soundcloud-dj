@@ -1,6 +1,8 @@
 import React from 'react';
 import Slider from 'material-ui/Slider';
+import { connect } from 'react-redux';
 
+import * as actions from '../../actions';
 import { formatTime } from '../../utils';
 
 const styles = {
@@ -52,4 +54,12 @@ TrackSlider.propTypes = {
   onSliderDrag: React.PropTypes.func,
 };
 
-export default TrackSlider;
+export default connect(
+  state => ({
+    activeTrack: state.track.activeTrack,
+    currentTrackTime: state.track.currentTrackTime,
+  }),
+  dispatch => ({
+    onSliderDrag: time => dispatch(actions.updateTrackPlayhead(time)),
+  }),
+)(TrackSlider);

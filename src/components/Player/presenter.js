@@ -50,7 +50,7 @@ export default class Player extends Component {
   }
 
   render() {
-    const { activeTrack, isPlaying, currentTrackTime, nowPlayingExpanded, onSliderDrag } = this.props;
+    const { activeTrack, isPlaying, currentTrackTime, nowPlayingExpanded } = this.props;
 
     if (isPlaying && !this.sliderUpdateTimeoutID) {
       this.awaitSliderUpdate();
@@ -65,7 +65,7 @@ export default class Player extends Component {
           <NowPlaying />
           <div className="player__controls">
             <ControlButtons />
-            <TrackSlider activeTrack={activeTrack} currentTrackTime={currentTrackTime} onSliderDrag={onSliderDrag} />
+            <TrackSlider />
             <Volume audioElement={this.audioElement} />
           </div>
         </div>
