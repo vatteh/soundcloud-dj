@@ -37,13 +37,13 @@ export default class Volume extends Component {
       <div className="rightControls">
         <i
           onClick={onRepeatToggle}
-          className="fa fa-repeat fa-2x rightControls__onRepeat"
+          className="fa fa-repeat fa-2x rightControls__onRepeat pointer"
           style={onRepeat ? styles.highlightIconStyle : {}}
           aria-hidden="true"
         />
         <i
           onClick={onRandomToggle}
-          className="fa fa-random fa-2x rightControls__onRandom"
+          className="fa fa-random fa-2x rightControls__onRandom pointer"
           style={onRandom ? styles.highlightIconStyle : {}}
           aria-hidden="true"
         />

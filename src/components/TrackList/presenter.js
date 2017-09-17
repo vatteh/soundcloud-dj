@@ -100,7 +100,7 @@ class TrackList extends Component {
           <TableBody displayRowCheckbox={false} showRowHover={true}>
             {tracks.map((track, key) => (
               <TableRow key={key} className="tableBodyRow" onDoubleClick={this.rowDoubleClickHelper.bind(this, track)}>
-                <TableRowColumn className="table__playIconColumnTitle pointer">
+                <TableRowColumn className="table__playIconColumnTitle">
                   <PlayIcons track={track} index={key} />
                 </TableRowColumn>
                 <TableRowColumn>

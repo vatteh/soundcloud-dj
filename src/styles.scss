@@ -66,6 +66,10 @@ a {
   }
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .playingTrackIcon {
   display: block;
 }
@@ -73,11 +77,13 @@ a {
 .playTrackIcon {
   opacity: 0;
   margin-left: 0;
+  cursor: pointer;
   transition: opacity 0.3s, transform 0.03s, margin-left 0.3s, ease-in-out;
 }
 
 .pauseTrackIcon {
   display: none;
+  cursor: pointer;
 }
 
 .indexTrackIcon {
@@ -257,10 +263,6 @@ a {
     i {
       margin-right: 5px;
     }
-  }
-
-  .pointer {
-    cursor: pointer;
   }
 }
 

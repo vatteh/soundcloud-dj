@@ -8,19 +8,19 @@ function ControlButtons({ activeTrack, isPlaying, onPrevNextTrackIconClick, onPl
     <div className="controlButtons">
       <i
         onClick={onPrevNextTrackIconClick.bind(this, activeTrack, -1)}
-        className="fa fa-step-backward fa-2x"
+        className="fa fa-step-backward fa-2x pointer"
         aria-hidden="true"
       />
       <span onClick={onPlayPauseIconClick.bind(this, activeTrack)}>
         {isPlaying ? (
-          <i className="fa fa-pause fa-3x" aria-hidden="true" />
+          <i className="fa fa-pause fa-3x pointer" aria-hidden="true" />
         ) : (
-          <i className="fa fa-play fa-3x" aria-hidden="true" />
+          <i className="fa fa-play fa-3x pointer" aria-hidden="true" />
         )}
       </span>
       <i
         onClick={onPrevNextTrackIconClick.bind(this, activeTrack, 1)}
-        className="fa fa-step-forward fa-2x"
+        className="fa fa-step-forward fa-2x pointer"
         aria-hidden="true"
       />
     </div>
