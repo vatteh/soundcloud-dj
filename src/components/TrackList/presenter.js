@@ -66,7 +66,7 @@ class TrackList extends Component {
   }
 
   render() {
-    const { tracks = [], activeTrack, onFetchTracks, sortBy } = this.props;
+    const { tracks = [], activeTrack, onFetchTracks, sortBy, fetchingTracks } = this.props;
 
     return (
       <div>
@@ -123,7 +123,7 @@ class TrackList extends Component {
               </TableRow>
             ))}
             <TableRow className="tableBodyRow">
-              <CircularProgress size={70} thickness={7} style={loaderStyles} />
+              {fetchingTracks && <CircularProgress size={70} thickness={7} style={loaderStyles} />}
             </TableRow>
           </TableBody>
         </Table>
