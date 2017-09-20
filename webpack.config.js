@@ -1,8 +1,10 @@
 const webpack = require('webpack');
 const path = require('path');
 
+const PORT = process.env.PORT || 1337;
+
 module.exports = {
-  entry: ['webpack-dev-server/client?http://localhost:1337', 'webpack/hot/only-dev-server', './src/index.js'],
+  entry: [`webpack-dev-server/client?http://localhost:${PORT}`, 'webpack/hot/only-dev-server', './src/index.js'],
   module: {
     loaders: [
       {
@@ -33,7 +35,7 @@ module.exports = {
     contentBase: ['./dist', './node_modules'],
     hot: true,
     historyApiFallback: true,
-    port: 1337,
+    port: PORT,
   },
   plugins: [
     new webpack.ProvidePlugin({

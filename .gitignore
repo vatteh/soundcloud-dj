@@ -8,6 +8,7 @@
 
 # production
 /build
+/dist/bundle.js
 
 # auth
 /src/constants/auth.js
