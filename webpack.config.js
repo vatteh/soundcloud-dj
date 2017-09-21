@@ -4,7 +4,7 @@ const path = require('path');
 const PORT = 1337;
 let entryPoints = [];
 
-if (!process.env.NODE_ENV) {
+if (process.env.NODE_ENV !== 'production') {
   entryPoints = [`webpack-dev-server/client?http://localhost:${PORT}`, 'webpack/hot/only-dev-server'];
 }
 
