@@ -9,7 +9,7 @@ import TrackSlider from '../TrackSlider';
 import ControlButtons from '../ControlButtons';
 import NowPlaying from '../NowPlaying';
 import Volume from '../Volume';
-import CLIENT_ID from '../../constants/auth';
+import { clientData } from '../../actions/track';
 
 export default class Player extends Component {
   componentDidUpdate() {
@@ -75,7 +75,7 @@ export default class Player extends Component {
             ref={(element) => {
               this.audioElement = element;
             }}
-            src={`${activeTrack.stream_url}?client_id=${CLIENT_ID}`}
+            src={`${activeTrack.stream_url}?client_id=${clientData.CLIENT_ID}`}
           />
         ) : null}
       </div>

@@ -8,7 +8,6 @@ import PlayIcons from '../PlayIcons';
 import Player from '../Player';
 import AppToolbar from '../AppToolbar';
 import SortIcon from '../SortIcon';
-import CLIENT_ID from '../../constants/auth';
 
 const loaderStyles = {
   display: 'flex',

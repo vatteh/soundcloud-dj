@@ -1,10 +1,12 @@
 /* eslint-env browser */
-import CLIENT_ID from '../constants/auth';
 import * as actionTypes from '../constants/actionTypes';
 import { formatTime, formatDate } from '../utils';
 
+export const clientData = {
+  CLIENT_ID: null,
+};
 const LIMIT = 25;
-const baseURL = `//api.soundcloud.com/tracks?linked_partitioning=1&limit=${LIMIT}&client_id=${CLIENT_ID}`;
+let baseURL;
 const defaultTags = '&tags=Tech%20House';
 let trackOffset = 0;
 
@@ -112,16 +114,27 @@ export function fetchTracks(searchText) {
     }
 
     dispatch(fetchingTracks());
-    const url = baseURL + searchParam + offsetParam;
-    fetch(url)
-      .then(response => response.json())
-      .then((data) => {
-        data.collection.forEach((element) => {
-          element.duration_formatted = formatTime(element.duration);
-          element.created_at_formatted = formatDate(element.created_at);
+    const clientIdPromise = !clientData.CLIENT_ID
+      ? fetch('/client_id/')
+          .then(response => response.json())
+          .then((data) => {
+            clientData.CLIENT_ID = data;
+            baseURL = `//api.soundcloud.com/tracks?linked_partitioning=1&limit=${LIMIT}&client_id=${clientData.CLIENT_ID}`;
+          })
+      : Promise.resolve();
+
+    clientIdPromise.then(() => {
+      const url = baseURL + searchParam + offsetParam;
+      fetch(url)
+        .then(response => response.json())
+        .then((data) => {
+          data.collection.forEach((element) => {
+            element.duration_formatted = formatTime(element.duration);
+            element.created_at_formatted = formatDate(element.created_at);
+          });
+          dispatch(setTracks(data.collection, searchText === undefined));
+          trackOffset += LIMIT;
         });
-        dispatch(setTracks(data.collection, searchText === undefined));
-        trackOffset += LIMIT;
-      });
+    });
   };
 }

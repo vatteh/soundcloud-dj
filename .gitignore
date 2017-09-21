@@ -10,9 +10,6 @@
 /build
 /dist/bundle.js
 
-# auth
-/src/constants/auth.js
-
 # misc
 .DS_Store
 .env

@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const Promise = require('bluebird');
 const http = require('http');
 const chalk = require('chalk');
@@ -7,6 +9,10 @@ const express = require('express');
 const app = express();
 
 app.use(express.static(path.join(__dirname, './dist/')));
+
+app.get('/client_id/', (req, res) => {
+  res.json(process.env.CLIENT_ID);
+});
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));

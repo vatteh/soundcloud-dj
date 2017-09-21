@@ -1,4 +1,4 @@
-import CLIENT_ID from '../constants/auth';
+import { clientData } from './track';
 import * as actionTypes from '../constants/actionTypes';
 import { formatTime, formatDate } from '../utils';
 
@@ -31,7 +31,7 @@ export function toggleAutoScrollComments(autoScrollComments) {
 export function fetchComments() {
   return (dispatch, getState) => {
     const state = getState();
-    fetch(commentsURL(state.track.activeTrack.id, CLIENT_ID))
+    fetch(commentsURL(state.track.activeTrack.id, clientData.CLIENT_ID))
       .then(response => response.json())
       .then((data) => {
         data.sort((a, b) => a.timestamp - b.timestamp).forEach((element) => {
