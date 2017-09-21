@@ -1,10 +1,17 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const PORT = process.env.PORT || 1337;
+const PORT = 1337;
+let entryPoints = [];
+
+if (!process.env.NODE_ENV) {
+  entryPoints = [`webpack-dev-server/client?http://localhost:${PORT}`, 'webpack/hot/only-dev-server'];
+}
+
+entryPoints.push('./src/index.js');
 
 module.exports = {
-  entry: [`webpack-dev-server/client?http://localhost:${PORT}`, 'webpack/hot/only-dev-server', './src/index.js'],
+  entry: entryPoints,
   module: {
     loaders: [
       {
