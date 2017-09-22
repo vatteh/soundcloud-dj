@@ -53,6 +53,7 @@
     "chalk": "2.1.0",
     "dotenv": "4.0.0",
     "express": "4.15.4",
+    "loader-utils": "1.1.0",
     "material-ui": "^0.17.4",
     "moment": "^2.18.1",
     "react": "^15.4.2",
