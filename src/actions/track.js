@@ -101,8 +101,8 @@ export function fetchTracks(searchText) {
     if (searchText !== undefined) {
       trackOffset = 0;
     }
-    const offsetParam = `&offset=${trackOffset}`;
 
+    const offsetParam = `&offset=${trackOffset}`;
     const state = getState();
     let searchParam;
     if (searchText) {
