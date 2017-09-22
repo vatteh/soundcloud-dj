@@ -11,7 +11,8 @@
     "test:watch": "npm run test -- --watch"
   },
   "engines": {
-    "node": "6.11.2"
+    "node": "6.11.2",
+    "npm": "3.10.10"
   },
   "keywords": [],
   "author": "",
