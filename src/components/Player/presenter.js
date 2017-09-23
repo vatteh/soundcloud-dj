@@ -37,7 +37,7 @@ export default class Player extends Component {
   }
 
   awaitSliderUpdate() {
-    const { onSliderUpdate, activeTrack } = this.props;
+    const { onSliderUpdate, activeTrack, currentTrackTime } = this.props;
     const sliderUpdateTime = Math.min(activeTrack.duration / 1000, 1000);
 
     this.sliderUpdateTimeoutID = setTimeout(() => {
@@ -47,7 +47,9 @@ export default class Player extends Component {
       }
 
       this.sliderUpdateTimeoutID = undefined;
-      onSliderUpdate(audioElement.currentTime);
+      onSliderUpdate(
+        currentTrackTime !== audioElement.currentTime ? audioElement.currentTime : audioElement.currentTime + 0.01, // To prevent a bug where the slider does not update when a track starts
+      );
     }, sliderUpdateTime);
   }
 
