@@ -37,7 +37,8 @@ export default class Player extends Component {
   }
 
   awaitSliderUpdate() {
-    const { onSliderUpdate } = this.props;
+    const { onSliderUpdate, activeTrack } = this.props;
+    const sliderUpdateTime = Math.min(activeTrack.duration / 1000, 1000);
 
     this.sliderUpdateTimeoutID = setTimeout(() => {
       const audioElement = ReactDOM.findDOMNode(this.audioElement);
@@ -47,7 +48,7 @@ export default class Player extends Component {
 
       this.sliderUpdateTimeoutID = undefined;
       onSliderUpdate(audioElement.currentTime);
-    }, 1000);
+    }, sliderUpdateTime);
   }
 
   render() {
