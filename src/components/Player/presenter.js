@@ -4,6 +4,7 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCol
 import FontIcon from 'material-ui/FontIcon';
 import { GridList } from 'material-ui/GridList';
 import Slider from 'material-ui/Slider';
+import CLIENT_ID from '../../constants/ids';
 
 import TrackSlider from '../TrackSlider';
 import ControlButtons from '../ControlButtons';
@@ -75,7 +76,7 @@ export default class Player extends Component {
             ref={(element) => {
               this.audioElement = element;
             }}
-            src={`${activeTrack.stream_url}?client_id=${clientData.CLIENT_ID}`}
+            src={`${activeTrack.stream_url}?client_id=${CLIENT_ID}`}
           />
         ) : null}
       </div>

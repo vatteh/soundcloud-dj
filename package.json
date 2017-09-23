@@ -4,7 +4,7 @@
   "description": "Music player client using soundcloud api",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --colors --hot --config ./webpack.config.js",
+    "start": "webpack-dev-server --progress --colors --hot --config ./webpack.dev.config.js",
     "prod": "node server.js",
     "postinstall": "webpack --config ./webpack.prod.config.js -p",
     "test": "mocha --compilers js:babel-core/register --require ./test/setup.js 'src/**/*spec.js'",
@@ -50,7 +50,6 @@
     "webpack": "^2.3.2",
     "bluebird": "3.5.0",
     "chalk": "2.1.0",
-    "dotenv": "4.0.0",
     "express": "4.15.4",
     "material-ui": "^0.17.4",
     "node-sass": "4.5.3",
